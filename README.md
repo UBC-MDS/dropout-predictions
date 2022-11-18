@@ -44,3 +44,9 @@ We aim to perform a perliminary modelling using the K-nearest neighbors, Naive B
 The hyperparameters of the aforementioned models will be optimized using cross-validation to determine the best estimator. The performance of these models will be tabulated in the report for comparison. The reasons for best estimator selection will be documented along will modelling assumptions and identified deficiencies. The train data will be refit on the best estimator and the final predictions will be made on the test data. The confusion matrix will be documented and included in the final report along with comments on any misclassifications and their affect on model performance.
 
 The prelimary EDA performed as part of the Milestone 1 objectives can be found [here](https://github.com/UBC-MDS/dropout-predictions/blob/eda-caesar/src/dropout_pred_EDA.ipynb).
+
+
+### License
+
+
+The Student Dropout Predictor matrials here are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) license. This allows for the sharing and adaptation of the datasets for our purpose of academic study and understanding, with the appropriate credit is given.
