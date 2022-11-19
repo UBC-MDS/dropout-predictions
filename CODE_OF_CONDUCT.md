@@ -1,6 +1,6 @@
 ## Code of Conduct
 
-Table of Content
+### Table of Content
 
 1. Introduction
 2. Scope
