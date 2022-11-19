@@ -2,7 +2,7 @@
 
 
 * author: Ranjit Sundaramurthi
-* contributors: Andy Wang, Caesar Wong, ZhiyiChen
+* contributors: Andy Wang, Caesar Wong, Ziyi Chen
 
 
 
