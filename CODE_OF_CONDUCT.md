@@ -2,14 +2,14 @@
 
 Table of Content
 
-* Introduction
-* Scope
-* Values
-* Expected behaviors
-* Unacceptable behaviors
-* Committing to improvement
-* Enforcement
-* Attribution
+1. Introduction
+2. Scope
+3. Values
+4. Expected behaviors
+5. Unacceptable behaviors
+6. Committing to improvement
+7. Enforcement
+8. Attribution
 
 
 
