@@ -6,6 +6,7 @@ Please adhere to these rules while making a contribution to this project.
 
 ## How Can I Contribute?
 
+
 ### 1. Fixing typos
 
 If you spot any minor typos or grammatical errors in the documentation, you can modify it right away using the GitHub web interface as long as you make the changes in the project's _source_ file.
