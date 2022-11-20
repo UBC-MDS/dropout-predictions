@@ -40,17 +40,17 @@ We aim to perform a perliminary modelling using the Naive Bayes and Logistic Reg
 
 The hyperparameters of the aforementioned models will be optimized using cross-validation to determine the best estimator. The performance of these models will be tabulated in the report for comparison. The reasons for best estimator selection will be documented along will modelling assumptions and identified deficiencies. The train data will be refit on the best estimator and the final predictions will be made on the test data. The confusion matrix will be documented and included in the final report along with comments on any misclassifications and their affect on model performance.
 
-The prelimary EDA performed as part of the Milestone 1 objectives can be found [here](https://github.com/UBC-MDS/dropout-predictions/blob/eda-caesar/src/dropout_pred_EDA.pdf).
+The prelimary EDA performed as part of the Milestone 1 objectives can be found in the [dropout_pred_EDA.pdf](https://github.com/UBC-MDS/dropout-predictions/blob/main/src/dropout_pred_EDA.pdf).
 
 
-### License
+### Usage
 
+To replicate the analysis, clone this GitHub repository, install the
+[dependencies](#dependencies) listed below.
 
-The Student Dropout Predictor matrials here are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) license. This allows for the sharing and adaptation of the datasets for our purpose of academic study and understanding, with the appropriate credit is given.
-
+`git clone https://github.com/UBC-MDS/dropout-predictions.git`
 
 ### Dependencies
-
 
 * Python 3.9.12 and Python packages: 
   * ipykernel
@@ -65,3 +65,13 @@ The Student Dropout Predictor matrials here are licensed under the Creative Comm
   * imbalanced-learn
   * pip
   * lightgbm
+  
+### License
+
+The Student Dropout Predictor matrials here are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) license. This allows for the sharing and adaptation of the datasets for our purpose of academic study and understanding, with the appropriate credit is given.
+
+
+### References
+- [UCI Database - Predict students' dropout and academic success](https://archive-beta.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success)
+
+- Realinho,Valentim, Vieira Martins,Mónica, Machado,Jorge & Baptista,Luís. (2021). Predict students' dropout and academic success. UCI Machine Learning Repository. https://doi.org/1.
