@@ -74,4 +74,4 @@ The Student Dropout Predictor matrials here are licensed under the Creative Comm
 ### References
 - [UCI Database - Predict students' dropout and academic success](https://archive-beta.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success)
 
-- Realinho,Valentim, Vieira Martins,Mónica, Machado,Jorge & Baptista,Luís. (2021). Predict students' dropout and academic success. UCI Machine Learning Repository. https://doi.org/1.
+- Realinho,Valentim, Vieira Martins,Mónica, Machado,Jorge & Baptista,Luís. (2021). Predict students' dropout and academic success. UCI Machine Learning Repository. https://archive-beta.ics.uci.edu/
