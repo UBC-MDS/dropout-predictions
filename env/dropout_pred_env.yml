@@ -1,0 +1,27 @@
+# Install the course conda environment by running 
+# the following command in your conda base environment:
+# (base)> conda env create -f dropout_pred_env.yml
+# After installing the environment, you can activate it using:
+# (base)> conda activate dropout_pred_env
+
+name: 'dropout_pred_env'
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - jinja2
+  - python-graphviz
+  - lightgbm
+  - graphviz
+  - pip
+  - ipykernel
+  - torchvision
+  - scikit-learn[version='>=1.0']
+  - matplotlib[version='>=3.2.2']
+  - requests[version='>=2.24.0']
+  - pandas[version='>=1.3.*']
+  - altair_saver
+  - wordcloud
+  - yellowbrick
+  - ipywidgets
+prefix: C:\ProgramData\Miniconda3\envs\571
