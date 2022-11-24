@@ -49,6 +49,7 @@ To replicate the analysis, clone [this](https://github.com/UBC-MDS/dropout-predi
 conda environment listed in [here](https://github.com/UBC-MDS/dropout-predictions/blob/main/env/dropout_pred_env.yml) `conda env create -f env/dropout_pred_env.yml`, activate the environment `conda activate dropout_pred_env`and run the following
 commands at the command line/terminal from the root directory of this
 project:
+
     # download data
     python src/download_data.py --url="https://archive-beta.ics.uci.edu/static/ml/datasets/697/predict+students+dropout+and+academic+success.zip" --extract_to="data/raw/"
     
