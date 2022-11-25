@@ -12,7 +12,12 @@
 ## Objective
 
 
-Academic performance/graduation in a population is an important factor in their overall employability which contributes towards economic development. This Data Science project predicts the Student Dropout given the factors on demography, socioeconomics, macroeconomics and relevant academic data provided by the Student on enrollment. This prediction is important to understand the student academic capacity. This important knowledge can be used to identify key areas of development such as, development of socially disadvantaged communities, improvement of academic programs, development of educational funding programs  etc.  
+Academic performance/graduation in a population is an important factor in their overall employability which contributes towards economic development. This Data Science project predicts the Student Dropout given the factors on demography, socioeconomics, macroeconomics and relevant academic data provided by the Student on enrollment. This prediction is important to understand the student academic capacity. This important knowledge can be used to identify key areas of development such as, development of socially disadvantaged communities, improvement of academic programs, development of educational funding programs  etc.  This project will try to investigate the following resarch questions:
+
+> **Given a student with his/her demography, socioeconomics, macroeconomics, and relevant academic data, how accurately can we predict whether he/she will drop out of school?**
+
+> **What are the main factors contributing to the student dropout rate?**
+
 
 
 ## Dataset
