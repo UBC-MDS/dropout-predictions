@@ -51,7 +51,11 @@ The preliminary EDA performed as part of the Milestone 1 objectives can be found
 ## Usage
 
 To replicate the analysis, clone [this](https://github.com/UBC-MDS/dropout-predictions.git) GitHub repository, install the
-conda environment listed in [here](https://github.com/UBC-MDS/dropout-predictions/blob/main/env/dropout_pred_env.yml) `conda env create -f env/dropout_pred_env.yml`, activate the environment `conda activate dropout_pred_env`and run the following
+conda environment listed in [here](https://github.com/UBC-MDS/dropout-predictions/blob/main/env/dropout_pred_env.yml) 
+> `conda env create -f env/dropout_pred_env.yml`, 
+activate the environment 
+> `conda activate dropout_pred_env`
+and run the following
 commands at the command line/terminal from the root directory of this
 project:
 
