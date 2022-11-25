@@ -12,7 +12,7 @@ Options:
 """
 
 # Example:
-# python download_data.py --url="https://archive-beta.ics.uci.edu/static/ml/datasets/697/predict+students+dropout+and+academic+success.zip" --extract_to="./data/raw/"
+# python download_data.py --url="https://archive-beta.ics.uci.edu/static/ml/datasets/697/predict+students+dropout+and+academic+success.zip" --extract_to="../data/raw/"
 
 # importing necessary modules
 from docopt import docopt
