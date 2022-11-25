@@ -12,9 +12,11 @@ Team members should review the changes and approve the PR within 7 days.
 
 Team members should `git pull` to get the latest version of the project before making changes.
 
-For non-team member contributions, please fork the git repository, modify the code and submit a PR. The core team will review the issue and act within 7 days.
+
 
 ## How Can I Contribute?
+
+For non core team member contributions, please fork the git repository, modify the code and submit a PR. The core team will review the issue and act within 7 days.
 
 ### 1. Fixing typos
 
