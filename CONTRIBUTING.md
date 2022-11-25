@@ -12,11 +12,22 @@ Team members should review the changes and approve the PR within 7 days.
 
 Team members should `git pull` to get the latest version of the project before making changes.
 
+General contribution steps:
+
+1. `git pull` to obtain the latest changes from the remote repository
+2. `git switch -c <branch_name>`, where branch_name is the name of the new feature branch
+3. Modify code & test the code
+4. `git add <related_files>`, add all the modified files
+5. `git commit -m "msg"`, commit changes with a **meaningful** commit message
+6. `git push --set-upstream origin <branch_name>`, pushing local changes with a new branch to the remote
+7. Submit a PR
+8. Other teammates should review the PR within 7 days, and approve the PR or add comments if necessary
+9. Merge branch
 
 
 ## How Can I Contribute?
 
-For non core team member contributions, please fork the git repository, modify the code and submit a PR. The core team will review the issue and act within 7 days.
+For non-core team member contributions, please fork the git repository, modify the code and submit a PR. The core team will review the issue and act within 7 days.
 
 ### 1. Fixing typos
 
