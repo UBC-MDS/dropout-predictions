@@ -16,15 +16,15 @@
 ### Introduction
 
 This code of conduct controls the group 6 team's environment. 
-We anticipate that we will be able to explain our principles and commitments to one another on a high level, as well as respect one another on the team. We made this repository public in order to contribute our values to this ongoing discussion in the field of education and to inspire more people to pay attention to it and learn more on their own. As a team, we will continue to revise and evolve this repository as time goes on.
+We anticipate that we will be able to explain our principles and commitments to one another on a high level, as well as respect one another on the team. We made this repository public to contribute our values to this ongoing discussion in the field of education and to inspire more people to pay attention to it and learn more on their own. As a team, we will continue to revise and evolve this repository as time goes on.
 
 ### Scope
-This code of conduct applies to multiple locations, both within the project space and in public, where we represent the group 6 team and our dropout-prediction project. Communicating via the official team/project email, sharing thoughts via the official account on various social media platforms, having the best and most suitable manners both online and offline, and so on are examples of how they are represented.
+This code of conduct applies to multiple locations, both within the project space and in public, where we represent the group 6 team and our dropout-prediction project. Communicating via the official team/project email, sharing thoughts via the official account on various social media platforms, having the most suitable manners both online and offline and so on are examples of how they are represented.
 
 ### Values
-We want this project to be a harmonious, enjoyable, successful, and welcoming environment for every team member. We value the opinions of every team member. Additionally, there are a number of other things that set our project team apart.
+We want this project to be a harmonious, enjoyable, successful, and welcoming environment for every team member. We value the opinions of every team member. Additionally, several other things set our project team apart.
 At MDS, we collaborate with and support other teams. At MDS, we are surrounded by other professionals who can provide us with helpful perspectives. We encourage positive working relationships and keep the channels of communication open.
-Every skill, whether "soft" or "hard," is valued by us. We place the same weight on soft skills as we do on the technical coding work completed by team members. This is due to the fact that a group project's success depends not just on the coding component, but also on communication, insight, and the way we value each other's contributions. 
+Every skill, whether "soft" or "hard," is valued by us. We place the same weight on soft skills as we do on the technical coding work completed by team members. This is because a group project's success depends not just on the coding component, but also on communication, insight, and the way we value each other's contributions. 
 We are open to variety. Of fact, this is one of our guiding principles. By embracing diversity and inclusion, we can combat institutional discrimination.
 
 
@@ -34,8 +34,20 @@ Be helpful when a teammate asks for assistance.
 Be cooperative as you attempt to consider the questions.
 When receiving and providing feedback, act with kindness and respect.
 Unacceptable behaviors
-The team is committed to being considerate of people of different races, gender identities, gender expressions, sexual orientations, physical abilities, nations, ages, etc. in order to create a productive and positive work environment. Any harsh or discriminatory language is not acceptable in team communications.
+The team is committed to being considerate of people of different races, gender identities, gender expressions, sexual orientations, physical abilities, nations, ages, etc. to create a productive and positive work environment. Any harsh or discriminatory language is not acceptable in team communications.
 
+### Unaccepted Behaviour
+
+Our goal is to have a feeling of safety and inclusion within the community. Which includes people of different races and backgrounds, sexual orientations, gender orientations, religions, cultures, ethnic groups, and ages. **Any form of personal discrimination, harassment, or violence will not be tolerated.**
+This includes, but is not limited to:
+
+- Personal attacks in the form of hurtful or discriminatory language including racist or sexist comments
+- Jokes or off-hand comments that are discriminate
+- Threatening or intimidating others with sexually explicit or violent actions
+- Use of discriminatory or sexual media
+- Inappropriate physical or sexual interactions/attention
+
+Any breach in violation of unaccepted behavior will be met with respective consequences. Any form of physical or sexual violence/acts will be reported to the appropriate law enforcement agency. Any form of abusive or discriminatory language will be recorded and reported to the appropriate authority.
 
 
 ### Committing to improvement
