@@ -1,5 +1,5 @@
 # Author: Ziyi Chen
-# Date: 2022-11-23
+# Date: 2022-11-24
 
 """
 A script that uses preprocessed data and generate corresponding plots under the result/eda/ folder.
@@ -32,7 +32,8 @@ from sklearn.model_selection import train_test_split
 
 opt = docopt(__doc__) # This would parse into dictionary in python
 
-import vl_convert as vlc
+import vl_convert as vlc 
+
 
 def save_chart(chart, filename, scale_factor=1):
     '''
@@ -60,6 +61,7 @@ def save_chart(chart, filename, scale_factor=1):
 
 def main(input_path, output_path):
     
+    #creating target count bar plot
     df = pd.read_csv(input_path)
     target_bar = alt.Chart(df,
                      title='Target Count Bar Plot'
@@ -68,13 +70,14 @@ def main(input_path, output_path):
                 y=alt.Y('Target', sort='-x'))
     save_chart(target_bar, 'plot1.png',2)
 
+    #creating feature correlation plot
     df_target = df.replace({'Target': {'Dropout': 1, 'Graduate': 0}})
-
     f = plt.figure(figsize=(15, 15))
     sns.heatmap(df_target.corr(),annot=False, cmap='coolwarm',center=0,
             square=True, linewidths=.8, cbar_kws={"shrink": .7})
     plt.savefig("plot2.png")
 
+    #creating correlation heatmap
     feat_corr = df_target.drop("Target", axis=1).apply(lambda x: x.corr(df_target.Target))
     feat_corr = pd.DataFrame(feat_corr, columns=['correlation']).sort_values(['correlation'], ascending=False)
 
@@ -82,6 +85,7 @@ def main(input_path, output_path):
     sns.barplot(x=feat_corr['correlation'], y=feat_corr.index, palette="vlag")
     plt.savefig("plot3.png")
     
+    #creating age at enrollment density plot by gender & dropout
     gender_dict = {1: 'male', 0: 'female'}
     df2=df.replace({"Gender": gender_dict})
     gender_density = (alt.Chart(df2)
