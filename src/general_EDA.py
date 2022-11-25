@@ -27,35 +27,9 @@ import altair as alt
 
 from sklearn.model_selection import train_test_split
 
+from utils.save_plot import save_chart # adding utils function for plot saving
+
 opt = docopt(__doc__) # This would parse into dictionary in python
-
-
-# code adopted from DSCI-531 Data Visualization I
-import vl_convert as vlc 
-def save_chart(chart, filename, scale_factor=1):
-    '''
-    Save an Altair chart using vl-convert
-    
-    Parameters
-    ----------
-    chart : altair.Chart
-        Altair chart to save
-    filename : str
-        The path to save the chart to
-    scale_factor: int or float
-        The factor to scale the image resolution by.
-        E.g. A value of `2` means two times the default resolution.
-    '''
-    if filename.split('.')[-1] == 'svg':
-        with open(filename, "w") as f:
-            f.write(vlc.vegalite_to_svg(chart.to_dict()))
-    elif filename.split('.')[-1] == 'png':
-        with open(filename, "wb") as f:
-            f.write(vlc.vegalite_to_png(chart.to_dict(), scale=scale_factor))
-    else:
-        raise ValueError("Only svg and png formats are supported")
-# ended DSCI 531 code
-    
 
 
 def main(input_path, output_path):
@@ -75,7 +49,7 @@ def main(input_path, output_path):
                         y=alt.Y('Target', sort='-x')
                 )
     # Saving the first plot
-    save_chart(output_path + target_bar, 'target_count_bar_plot.png',2)
+    save_chart(target_bar, output_path + 'target_count_bar_plot.png',2)
 
 
     # 2. creating feature correlation plot
