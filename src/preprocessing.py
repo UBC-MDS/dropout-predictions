@@ -39,9 +39,13 @@ def main(input_path, sep, test_size, random_state, output_path):
     df = pd.read_csv(input_path, sep=sep)
     # validate df
         # check shape, etc.
+    
+    assert 'Nacionality' in df.columns, "typo is missing"
 
     # rename column & fix typo
     df = df.rename(columns={'Nacionality': 'Nationality', 'Daytime/evening attendance\t': 'Daytime_evening_attendance'})
+
+    assert 'Nationality' in df.columns, "failed to fix the typo"
 
     # drop na from df
     df = df.dropna()
@@ -82,8 +86,12 @@ def main(input_path, sep, test_size, random_state, output_path):
     print(df.shape)
 
     # data splitting
-    train_df, test_df = train_test_split(df, test_size=float(test_size), random_state=int(random_state))
-
+    try:
+        train_df, test_df = train_test_split(df, test_size=float(test_size), random_state=int(random_state))
+    except Exception as err:
+        print(f"Unexpected {err=}, {type(err)=}")
+        raise
+    
     print("train shape : ")
     print(train_df.shape)
 
