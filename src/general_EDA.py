@@ -2,17 +2,17 @@
 # Date: 2022-11-23
 
 """
-A script that preprocess the data and store it under the data/preprocess/ folder.
+A script that uses preprocessed data and generate corresponding plots under the result/eda/ folder.
 Usage: src/general_EDA.py --input_path=<input_path> --output_path=<output_path> 
  
 Options:
---input_path=<input_path>       Input path for the raw dataset
+--input_path=<input_path>       Input path for the preprocessed dataset
 
---output_path=<output_path>     Specify the path where user can store the preprocessed dataframe
+--output_path=<output_path>     Specify the path where user can store the plots
 """
 
 # Example:
-# python preprocessing.py --input_path="../data/raw/data.csv" --sep=';' --test_size=0.2 --random_state=522 --output_path="../data/processed"
+# python general_EDA.py --input_path="../data/processed" --output_path="../result/eda/"
 
 # importing necessary modules
 from docopt import docopt
@@ -73,8 +73,6 @@ def main(input_path, output_path):
     f = plt.figure(figsize=(15, 15))
     sns.heatmap(df_target.corr(),annot=False, cmap='coolwarm',center=0,
             square=True, linewidths=.8, cbar_kws={"shrink": .7})
-    
-    # plt.title('Correlation Heatmap')
     plt.savefig("plot2.png")
 
     feat_corr = df_target.drop("Target", axis=1).apply(lambda x: x.corr(df_target.Target))
