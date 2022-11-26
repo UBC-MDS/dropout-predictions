@@ -32,6 +32,29 @@ import matplotlib.pyplot as plt
 opt = docopt(__doc__) # This would parse into dictionary in python
 
 def main(test, out_dir):
+    '''
+    read all the stored model generated from training.py
+    Predict the y_test data
+    Generate confusion matrix, ROC curve, PR curve
+    
+    Parameters
+    ----------
+    test : str
+        testing data path
+
+    out_dir : str
+        output directory path
+     
+    Returns
+    -------
+    store 2 curve plot (ROC, PR)
+    store 3 confusion matrix png
+
+    Examples
+    --------
+    >>> main(opt["--train"], opt["--scoring_metrics"], opt["--out_dir"])
+    '''
+
     # get test data
     test_df = pd.read_csv(test)
     X_test, y_test = test_df.drop(columns=["Target"]), test_df["Target"]
@@ -61,7 +84,7 @@ def main(test, out_dir):
     # clean plot
     plt.clf()
 
-
+    # plotting ROC curve
     for model_name in models:
         if model_name != 'logisticRegression':
             fpr, tpr, thresholds = roc_curve(y_test, models[model_name].predict_proba(X_test)[:, 1])
@@ -77,6 +100,7 @@ def main(test, out_dir):
     # clean plot
     plt.clf()
     
+    # plotting confusion matrix 
     for model_name in models:
         y_test = test_df["Target"]
         # report = get_result(models[model_name], X_test, y_test)
@@ -101,10 +125,55 @@ def main(test, out_dir):
         plt.clf()
 
 def plot_x_y(x_data, y_data, label):
+    '''
+    This function will plot the given x & y data using line plot
+    
+    Parameters
+    ----------
+    x_data : np.array
+        X axis data
+
+    y_data : np.array
+        Y axis data
+
+    label : str
+        label string for plotting (model name)
+     
+    Returns
+    -------
+    plt : matplotlib object
+        for plotting purposes
+
+    Examples
+    --------
+    >>> plot_x_y(x_data, y_data, label)
+    '''
     plt.plot(x_data, y_data, label=label)
     return plt
 
 def get_result(final_model, test_x, test_y):
+    '''
+    This function will plot the given x & y data using line plot
+    
+    Parameters
+    ----------
+    final_model : sklearn model
+        given model from sklearn
+
+    test_x : np.array
+        X axis data
+
+    test_y : np.array
+        Y axis data
+     
+    Returns
+    -------
+    classification report
+
+    Examples
+    --------
+    >>> get_result(final_model, test_x, test_y)
+    '''
     return classification_report(test_y, final_model.predict(test_x), 
         target_names=["Graduate", "Drop"], output_dict=True)
 
