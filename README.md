@@ -47,7 +47,7 @@ The preliminary EDA performed as part of the Milestone 1 objectives can be found
 
 In this project, we will adopt the following data analysis pipeline. First of all, we will dowload and preprocess the raw data. After splitting and storing the required data files, we will use the `train_eda.csv` as the input of `general_EDA.py`, `train.csv` for `model_training.py`, and `testing.py` for `model_result.py`.
 
-![plot](doc/data_analysis_flow.png)
+![plot](doc/data_analysis_pipeline.png)
 
 ## Usage
 
