@@ -106,14 +106,24 @@ def main(test, out_dir):
     plt.clf()
     print_msg("ROC Curve Plotting Completed")
     
+    # creating test score storing data structure
+    score_dict = [{}, {}, {}, {}]
     # plotting confusion matrix 
     print_msg("Confusion Matrix Plotting")
     for model_name in models:
         y_test = test_df["Target"]
+        
         # report = get_result(models[model_name], X_test, y_test)
         # df = pd.DataFrame(report).transpose()
         # print(df)
         y_predict = models[model_name].predict(X_test)
+
+        score_dict[0][model_name] = (recall_score(y_test, y_predict))
+        score_dict[1][model_name] = (precision_score(y_test, y_predict))
+        score_dict[2][model_name] = (f1_score(y_test, y_predict))
+        score_dict[3][model_name] = (accuracy_score(y_test, y_predict))
+        
+
         y_predict = pd.DataFrame(y_predict, columns=['Target'])
         y_test = pd.DataFrame(y_test, columns=['Target'])
 
@@ -131,6 +141,10 @@ def main(test, out_dir):
         plt.savefig(out_dir + 'Confusion_Matrix_'+ model_name+'.png')
         plt.clf()
     print_msg("Confusion Matrix Plotting Completed")
+        
+    score_df = pd.DataFrame(score_dict, index=["Recall", "Precision", "F1", "Accuracy"])
+    print(score_df)
+    score_df.to_csv(out_dir + 'score_on_test.csv')
     print_msg("Model Testing Completed - End of Testing")
 
 def plot_x_y(x_data, y_data, label):
