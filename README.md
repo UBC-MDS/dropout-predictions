@@ -37,16 +37,17 @@ We plan to partition the dataset into training and test sets (80%: 20%). A detai
 
 We aim to perform preliminary modeling using the Naive Bayes and Logistic Regression classification algorithms to identify the best-performing model. The Naive Bayes algorithm is shortlisted for its ability to scale well and handle sparse data. With multiple categorical features, we anticipate sparsity in our model. The logistic Regression algorithm is chosen for its similar advantages to the Naive Bayes algorithm along with the attractive advantage of providing interpretability for feature importance selection. The performance metrics for our problem statement are `Recall`, `f1 score`, and `AUC` respectively, in order of importance. Type 2 errors where actual dropouts are not identified reduce the usefulness of our project. Thus `Recall` is an essential performance metric. The Type 1 errors indicated by the precision of the model are of relatively lesser significance as actual graduates incorrectly classified as dropouts will provide a conservative model which is relatively acceptable.
 
-
-
-
 ## Results and Conclusions Roadmap
-
 
 The hyperparameters of the aforementioned models will be optimized using cross-validation to determine the best estimator. The performance of these models will be tabulated in the report for comparison. The reasons for the best estimator selection will be documented along will modeling assumptions and identified deficiencies. The train data will be refit on the best estimator and the final predictions will be made on the test data. The confusion matrix will be documented and included in the final report along with comments on any misclassifications and their effect on model performance.
 
 The preliminary EDA performed as part of the Milestone 1 objectives can be found in the [dropout_pred_EDA.pdf](https://github.com/UBC-MDS/dropout-predictions/blob/main/src/dropout_pred_EDA.pdf).
 
+## Data Analysis Pipeline
+
+In this project, we will adopt the following data analysis pipeline. First of all, we will dowload and preprocess the raw data. After splitting and storing the required data files, we will use the `train_eda.csv` as the input of `general_EDA.py`, `train.csv` for `model_training.py`, and `testing.py` for `model_result.py`.
+
+![plot](doc/data_analysis_flow.png)
 
 ## Usage
 
