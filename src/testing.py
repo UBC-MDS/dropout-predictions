@@ -19,10 +19,14 @@ Options:
 from docopt import docopt
 import pickle
 import pandas as pd
+
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from sklearn.metrics import roc_curve
 from sklearn.metrics import classification_report
 from sklearn.metrics import precision_recall_curve
+from sklearn.metrics import confusion_matrix
+
+import seaborn as sns
 import matplotlib.pyplot as plt
 
 opt = docopt(__doc__) # This would parse into dictionary in python
@@ -32,8 +36,6 @@ def main(test, out_dir):
     test_df = pd.read_csv(test)
     X_test, y_test = test_df.drop(columns=["Target"]), test_df["Target"]
 
-    # get the best model 
-    # best model 1: logistic regression
     models = {'logisticRegression': '',
               'NaiveBayes': '',
               'RandomForestClassifier': ''}
@@ -75,19 +77,36 @@ def main(test, out_dir):
     # clean plot
     plt.clf()
     
-    
-    # # get the score
-    # pred = get_result(final_model_log, X_test, y_test)
-    # result_log = open(out_dir + '/result_log', 'wb')
-    # pickle.dump(pred, result_log)
-    # result_log.close()
+    for model_name in models:
+        y_test = test_df["Target"]
+        # report = get_result(models[model_name], X_test, y_test)
+        # df = pd.DataFrame(report).transpose()
+        # print(df)
+        y_predict = models[model_name].predict(X_test)
+        y_predict = pd.DataFrame(y_predict, columns=['Target'])
+        y_test = pd.DataFrame(y_test, columns=['Target'])
+
+        target_dict = {0: 'Graduate', 1: 'Dropout'}
+
+        y_predict = y_predict.replace({'Target': target_dict})
+        y_predict = y_predict.Target.tolist()
+        y_test = y_test.replace({'Target': target_dict})
+        y_test = y_test.Target.tolist()
+
+        cm_df = pd.DataFrame(confusion_matrix(y_test, y_predict),['Graduate', 'Dropout'],['Graduate', 'Dropout'])                      
+        plt.figure(figsize=(10,6))  
+        sns.heatmap(cm_df, annot=True, cmap="crest", fmt='d').set(title='Confusion Matrix ' + model_name)
+
+        plt.savefig(out_dir + 'Confusion_Matrix_'+ model_name+'.png')
+        plt.clf()
 
 def plot_x_y(x_data, y_data, label):
     plt.plot(x_data, y_data, label=label)
     return plt
 
 def get_result(final_model, test_x, test_y):
-    return classification_report(test_y, final_model.predict(test_x), target_names=["Graduate", "Drop"])
+    return classification_report(test_y, final_model.predict(test_x), 
+        target_names=["Graduate", "Drop"], output_dict=True)
 
 
 if __name__ == "__main__":
