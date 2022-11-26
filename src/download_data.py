@@ -21,7 +21,6 @@ from docopt import docopt
 import requests
 from utils.print_msg import print_msg # adding utils function for print msg
 
-
 opt = docopt(__doc__) # This would parse into dictionary in python
 
 def main(url, extract_to):
@@ -65,7 +64,6 @@ def main(url, extract_to):
         os.makedirs(os.path.dirname(extract_to))
         data.to_csv(extract_to, index=False)
         print_msg("Created new path and loading CSV Completed")
-
 
 if __name__ == "__main__":
     main(opt["--url"], opt["--extract_to"])
