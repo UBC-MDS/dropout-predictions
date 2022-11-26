@@ -75,7 +75,7 @@ def main(input_path, output_path):
                         y=alt.Y('Target', sort='-x')
                 )
     # Saving the first plot
-    save_chart(output_path + target_bar, 'target_count_bar_plot.png',2)
+    save_chart(target_bar, output_path + 'target_count_bar_plot.png',2)
 
 
     # 2. creating feature correlation plot
