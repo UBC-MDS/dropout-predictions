@@ -7,26 +7,25 @@ A script that downloads data in website and unzip to the location user specify a
 Usage: src/download_data.py --url=<url> --extract_to=<extract_to> 
  
 Options:
---url=<url>             URL from where to download the data (from uci website)
+--url=<url>             URL from where to download the csv file
 --extract_to=<extract_to>   Specify the path where user can get the data.csv in their local repository
 """
 
 # Example:
-# python download_data.py --url="https://archive-beta.ics.uci.edu/static/ml/datasets/697/predict+students+dropout+and+academic+success.zip" --extract_to="../data/raw/"
+# python download_data.py --url="https://raw.githubusercontent.com/caesarw0/ml-dataset/main/students_dropout_prediction/data.csv" --extract_to="../data/raw/data.csv"
 
 # importing necessary modules
-from docopt import docopt
-import requests, zipfile
-from io import BytesIO
 import os
+import pandas as pd
+from docopt import docopt
+import requests
 from utils.print_msg import print_msg # adding utils function for print msg
-
 
 opt = docopt(__doc__) # This would parse into dictionary in python
 
 def main(url, extract_to):
     """
-    Download the data from the given url and unzip it to its parent directory 
+    Download the data from the given url with csv and save it to its parent directory 
     if dirctory is not exist it will create a new directory based on extract_to argument.
     
     Parameters
@@ -40,30 +39,31 @@ def main(url, extract_to):
         
     Examples
     --------
-    >>> main("https://archive-beta.ics.uci.edu/static/ml/datasets/697/predict+students+dropout+and+academic+success.zip", "../data/raw/")
+    >>> main("https://raw.githubusercontent.com/caesarw0/ml-dataset/main/students_dropout_prediction/data.csv", "../data/raw/data.csv")
     """
-    
-    print_msg("Downloading Started")
-    # Split URL to get the file name
-    filename = url.split('/')[-1]
-    print(filename)
 
-    # Downloading the file by sending the request to the URL
-    req = requests.get(url, verify=False)
-    print_msg("Downloading Completed")
+    # A try catch block to check url is valid or not 
+    try: 
+        print_msg("Downloading Started")
+        request = requests.get(url)
+        request.status_code == 200
+        print_msg("Downloading Completed")
+    except Exception as req:
+        print_msg(req)
+        print_msg("Website at the provided url does not exist")
 
-    # extracting the zip file contents
-    zipfile1= zipfile.ZipFile(BytesIO(req.content))
-    
-    
+
+    data = pd.read_csv(url, header=None) # reading the data in a pandas dataframe
+
+    # Save the data as a csv file to the targetted path.
     try:
-        zipfile1.extractall(extract_to)
-    
+        print_msg("Loading CSV Started")
+        data.to_csv(extract_to, index=False)
+        print_msg("Loading CSV Completed")
     except:
         os.makedirs(os.path.dirname(extract_to))
-        zipfile1.extractall(extract_to)
-
-    print_msg("Download_data Completed - End of script")
+        data.to_csv(extract_to, index=False)
+        print_msg("Created new path and loading CSV Completed")
 
 if __name__ == "__main__":
     main(opt["--url"], opt["--extract_to"])
