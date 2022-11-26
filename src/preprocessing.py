@@ -100,6 +100,30 @@ def generalPreprocessing(df):
     return df
 
 def columnTransformation(train_df, test_df):
+    '''
+    Perform column transformation (OHE, standard scaling, binary variable encoding) on the given data
+    
+    Parameters
+    ----------
+    train_df : pd.DataFrame
+        training data
+
+    test_df : pd.DataFrame
+        testing data
+    
+    Returns
+    -------
+    transformed_train_df : pd.DataFrame
+        column transformed training data
+
+    transformed_test_df : pd.DataFrame
+        column transformed testing data
+
+    Examples
+    --------
+    >>> transformed_train_df, transformed_test_df = columnTransformation(train_df, test_df)
+    
+    '''
 # perform column transformation
     # - binary
     # - categorical (OHE)
@@ -168,7 +192,42 @@ def columnTransformation(train_df, test_df):
     return transformed_train_df, transformed_test_df
 
 def main(input_path, sep, test_size, random_state, output_path):
+    '''
+    main function for the preprocessing script
+    1. Data dropping
+    2. Data arrange column
+    3. column transformation
+
+    Parameters
+    ----------
+    input_path : str
+        input file path
+
+    sep : str
+        separator for read_csv
+
+    test_size : str --> float
+        testing size for train_test_split
+
+    random_state : str --> int
+        random state for read_csv
+
+    output_path : str
+        output file path
     
+    Returns
+    -------
+    <None>
+    save 3 csv to output_path
+    - train_eda.csv
+    - train.csv
+    - test.csv
+
+    Examples
+    --------
+    >>> main(opt["--input_path"], opt["--sep"], opt["--test_size"], opt["--random_state"], opt["--output_path"])
+    
+    '''
     df = pd.read_csv(input_path, sep=sep)
 
     df = generalPreprocessing(df)

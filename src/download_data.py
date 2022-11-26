@@ -21,22 +21,26 @@ from io import BytesIO
 import os
 
 opt = docopt(__doc__) # This would parse into dictionary in python
-"""
+
+def main(url, extract_to):
+    """
     Download the data from the given url and unzip it to its parent directory 
     if dirctory is not exist it will create a new directory based on extract_to argument.
     
-    Parameters:
+    Parameters
+    ----------
     url (str): The raw zip url which includes data.csv
     extract_to (str):  Path of where to get the file with downloaded data locally
     
-    Returns:
+    Returns
+    -------
     Stores the data.csv file in the extract_to's parent directory
-    Example:
-    main("https://archive-beta.ics.uci.edu/static/ml/datasets/697/predict+students+dropout+and+academic+success.zip", "../data/raw/")
+        
+    Examples
+    --------
+    >>> main("https://archive-beta.ics.uci.edu/static/ml/datasets/697/predict+students+dropout+and+academic+success.zip", "../data/raw/")
     """
-
-
-def main(url, extract_to):
+    
     print('Downloading started')
     # Split URL to get the file name
     filename = url.split('/')[-1]
