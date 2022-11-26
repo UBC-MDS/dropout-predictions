@@ -20,28 +20,45 @@ Options:
 
 # importing necessary modules
 from docopt import docopt
-import requests, zipfile
-from io import BytesIO
-import os
 
 from sklearn.model_selection import train_test_split
 import pandas as pd
 
-from sklearn.compose import ColumnTransformer, make_column_transformer
-from sklearn.pipeline import Pipeline, make_pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler, OrdinalEncoder
+from sklearn.compose import  make_column_transformer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
 opt = docopt(__doc__) # This would parse into dictionary in python
 
-def main(input_path, sep, test_size, random_state, output_path):
+def generalPreprocessing(df):
+    '''
+    Perform general preprocessing on df
     
-    df = pd.read_csv(input_path, sep=sep)
-    # validate df
-        # check shape, etc.
+    Parameters
+    ----------
+    df : pd.DataFrame
+        dataframe storing all the raw data
+    
+    Returns
+    -------
+    df : pd.DataFrame
+        preprocessed (fix type, drop 'Enrolled', arrange column order) dataframe
+        
+    Examples
+    --------
+    >>> generalPreprocessing(df)
+    df object
+    '''
+    
+    # testing column shape
+    assert df.shape[1] == 37, "Wrong dataframe shape (incorrect number of columns)"
+    # testing typo
+    assert 'Nacionality' in df.columns, "typo is missing"
 
     # rename column & fix typo
     df = df.rename(columns={'Nacionality': 'Nationality', 'Daytime/evening attendance\t': 'Daytime_evening_attendance'})
+    # testing fixed type
+    assert 'Nationality' in df.columns, "failed to fix the typo"
 
     # drop na from df
     df = df.dropna()
@@ -80,17 +97,10 @@ def main(input_path, sep, test_size, random_state, output_path):
 
     print("df shape : ")
     print(df.shape)
+    return df
 
-    # data splitting
-    train_df, test_df = train_test_split(df, test_size=float(test_size), random_state=int(random_state))
-
-    print("train shape : ")
-    print(train_df.shape)
-
-    # storing EDA ready dataset (1. dropped 'enrolled', 2. Fixed column typo, 3. dropna)
-    train_df.to_csv(output_path + '/train_eda.csv', index=False)
-
-    # perform column transformation
+def columnTransformation(train_df, test_df):
+# perform column transformation
     # - binary
     # - categorical (OHE)
     # - continuous (standardscaler)
@@ -154,6 +164,26 @@ def main(input_path, sep, test_size, random_state, output_path):
     target_dict = {'Dropout': 1, 'Graduate': 0}
     transformed_train_df = transformed_train_df.replace({'Target': target_dict})
     transformed_test_df = transformed_test_df.replace({'Target': target_dict})
+
+    return transformed_train_df, transformed_test_df
+
+def main(input_path, sep, test_size, random_state, output_path):
+    
+    df = pd.read_csv(input_path, sep=sep)
+
+    df = generalPreprocessing(df)
+
+    # data splitting
+    train_df, test_df = train_test_split(df, test_size=float(test_size), random_state=int(random_state))
+
+    print("train shape : ")
+    print(train_df.shape)
+
+    # storing EDA ready dataset (1. dropped 'enrolled', 2. Fixed column typo, 3. dropna)
+    train_df.to_csv(output_path + '/train_eda.csv', index=False)
+
+    # calling local columnTransformation function
+    transformed_train_df, transformed_test_df = columnTransformation(train_df, test_df)
 
     transformed_train_df.to_csv(output_path + '/train.csv', index=False)
     transformed_test_df.to_csv(output_path + '/test.csv', index=False)
