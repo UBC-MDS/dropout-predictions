@@ -57,15 +57,32 @@ conda environment listed in [here](https://github.com/UBC-MDS/dropout-prediction
 activate the environment 
 > `conda activate dropout_pred_env`
 
-and run the following
-commands at the command line/terminal from the root directory of this
-project:
+and run the following commands `bash data_analysis_pipeline.sh` under `src` folder:
+
+    
+
+    <<comment
+    This shell script will include all the script running required to reproduce the dropout prediction analysis.
+    Please run this script within the src/ folder
+    comment
 
     # download data
-    python src/download_data.py --url="https://archive-beta.ics.uci.edu/static/ml/datasets/697/predict+students+dropout+and+academic+success.zip" --extract_to="data/raw/"
-    
+    python download_data.py --url="https://raw.githubusercontent.com/caesarw0/ml-dataset/main/students_dropout_prediction/data.csv" --extract_to="../data/raw/data.csv"
+
     # preprocess data 
-    python src/preprocessing.py --input_path="data/raw/data.csv" --sep=';' --test_size=0.2 --random_state=522 --output_path="data/processed"
+    python preprocessing.py --input_path="../data/raw/data.csv" --sep=',' --test_size=0.2 --random_state=522 --output_path="../data/processed"
+
+    # generate EDA plot
+    python general_EDA.py --input_path="../data/processed/train_eda.csv" --output_path="../results/"
+
+    # model training
+    python model_training.py --train="../data/processed/train.csv" --scoring_metrics="recall" --out_dir="../results/"
+
+    # model testing
+    python model_result.py --test="../data/processed/test.csv" --out_dir="../results/"
+
+    # generate final report 
+    Rscript -e 'rmarkdown::render("../doc/The_Report_of_Dropout_Prediction.Rmd")'
   
 ## License
 
