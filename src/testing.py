@@ -28,6 +28,8 @@ from sklearn.metrics import confusion_matrix
 
 import seaborn as sns
 import matplotlib.pyplot as plt
+from utils.print_msg import print_msg # adding utils function for print msg
+
 
 opt = docopt(__doc__) # This would parse into dictionary in python
 
@@ -54,7 +56,7 @@ def main(test, out_dir):
     --------
     >>> main(opt["--train"], opt["--scoring_metrics"], opt["--out_dir"])
     '''
-
+    print_msg("Begin Model Testing")
     # get test data
     test_df = pd.read_csv(test)
     X_test, y_test = test_df.drop(columns=["Target"]), test_df["Target"]
@@ -70,6 +72,7 @@ def main(test, out_dir):
 
     
     # plot PR curve
+    print_msg("PR Curve Plotting")
     for model_name in models:
         precision, recall, thresholds = precision_recall_curve(
                                     y_test, models[model_name].predict_proba(X_test)[:, 1])
@@ -83,7 +86,9 @@ def main(test, out_dir):
 
     # clean plot
     plt.clf()
+    print_msg("PR Curve Plotting Completed")
 
+    print_msg("ROC Curve Plotting")
     # plotting ROC curve
     for model_name in models:
         if model_name != 'logisticRegression':
@@ -99,8 +104,10 @@ def main(test, out_dir):
 
     # clean plot
     plt.clf()
+    print_msg("ROC Curve Plotting Completed")
     
     # plotting confusion matrix 
+    print_msg("Confusion Matrix Plotting")
     for model_name in models:
         y_test = test_df["Target"]
         # report = get_result(models[model_name], X_test, y_test)
@@ -123,6 +130,8 @@ def main(test, out_dir):
 
         plt.savefig(out_dir + 'Confusion_Matrix_'+ model_name+'.png')
         plt.clf()
+    print_msg("Confusion Matrix Plotting Completed")
+    print_msg("Model Testing Completed - End of Testing")
 
 def plot_x_y(x_data, y_data, label):
     '''

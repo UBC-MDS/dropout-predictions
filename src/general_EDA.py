@@ -12,7 +12,7 @@ Options:
 """
 
 # Example:
-# python general_EDA.py --input_path="../data/processed" --output_path="../result/eda/"
+# python general_EDA.py --input_path="../data/processed/train_eda.csv" --output_path="../results/"
 
 # importing necessary modules
 from docopt import docopt
@@ -28,11 +28,13 @@ import altair as alt
 from sklearn.model_selection import train_test_split
 
 from utils.save_plot import save_chart # adding utils function for plot saving
+from utils.print_msg import print_msg # adding utils function for print msg
 
 opt = docopt(__doc__) # This would parse into dictionary in python
 
 
 def main(input_path, output_path):
+    print_msg("Begin General EDA")
     
     #creating target count bar plot
     df = pd.read_csv(input_path)
@@ -41,7 +43,9 @@ def main(input_path, output_path):
 
     assert df.shape[1] == 37, "Incorrect number of column expected"
 
+   
     # 1. Creating first plot
+    print_msg("Constructing Plot 1")
     target_bar = alt.Chart(df,
                      title='Target Count Bar Plot'
                 ).mark_bar().encode(
@@ -51,8 +55,9 @@ def main(input_path, output_path):
     # Saving the first plot
     save_chart(target_bar, output_path + 'target_count_bar_plot.png',2)
 
-
+    
     # 2. creating feature correlation plot
+    print_msg("Constructing Plot 2")
     df_target = df.replace({'Target': {'Dropout': 1, 'Graduate': 0}})
     f = plt.figure(figsize=(15, 15))
     sns.heatmap(df_target.corr(),annot=False, cmap='coolwarm',center=0,
@@ -61,8 +66,8 @@ def main(input_path, output_path):
     # Saving the feature correlation plot
     plt.savefig(output_path + "correlation_heatmap_plot.png", bbox_inches = 'tight')
 
-    
     # 3. creating correlation heatmap
+    print_msg("Constructing Plot 3")
     feat_corr = df_target.drop("Target", axis=1).apply(lambda x: x.corr(df_target.Target))
     feat_corr = pd.DataFrame(feat_corr, columns=['correlation']).sort_values(['correlation'], ascending=False)
     
@@ -75,6 +80,7 @@ def main(input_path, output_path):
     
     
     # 4. creating age at enrollment density plot by gender & dropout
+    print_msg("Constructing Plot 4")
     gender_dict = {1: 'male', 0: 'female'}
     df2=df.replace({"Gender": gender_dict})
     gender_density = (alt.Chart(df2)
@@ -95,6 +101,7 @@ def main(input_path, output_path):
                     )
     # saving gender density plot with age at enrollment
     save_chart(gender_density, output_path + 'gender_density_plot.png',2)
+    print_msg("General EDA Completed - End of general_EDA")
 
 if __name__ == "__main__":
     main(opt["--input_path"], opt["--output_path"])

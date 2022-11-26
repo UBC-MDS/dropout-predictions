@@ -26,6 +26,7 @@ import pandas as pd
 
 from sklearn.compose import  make_column_transformer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from utils.print_msg import print_msg # adding utils function for print msg
 
 
 opt = docopt(__doc__) # This would parse into dictionary in python
@@ -230,14 +231,16 @@ def main(input_path, sep, test_size, random_state, output_path):
     '''
     df = pd.read_csv(input_path, sep=sep)
 
+    print_msg("Begin General Preprocessing")
     df = generalPreprocessing(df)
-
+    print_msg("Finish General Preprocessing")
     # data splitting
     train_df, test_df = train_test_split(df, test_size=float(test_size), random_state=int(random_state))
 
     print("train shape : ")
     print(train_df.shape)
 
+    print_msg("Storing Data")
     # storing EDA ready dataset (1. dropped 'enrolled', 2. Fixed column typo, 3. dropna)
     train_df.to_csv(output_path + '/train_eda.csv', index=False)
 
@@ -247,7 +250,7 @@ def main(input_path, sep, test_size, random_state, output_path):
     transformed_train_df.to_csv(output_path + '/train.csv', index=False)
     transformed_test_df.to_csv(output_path + '/test.csv', index=False)
 
-    print("Finished preprocessing")
+    print_msg("Data Storing Completed - End of Preprocessing")
 
     
 

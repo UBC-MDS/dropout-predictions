@@ -35,6 +35,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from utils.print_msg import print_msg # adding utils function for print msg
+
 
 # logistic regression and random forest
 opt = docopt(__doc__) # This would parse into dictionary in python
@@ -65,6 +67,7 @@ def main(train, scoring_metrics, out_dir):
     --------
     >>> main(opt["--train"], opt["--scoring_metrics"], opt["--out_dir"])
     '''
+    print_msg("Begin Model Training")
     cross_val_results = {}
     # get training data
     train_df = pd.read_csv(train)
@@ -95,6 +98,7 @@ def main(train, scoring_metrics, out_dir):
     
     # for each model 
     for model_name in models:
+        print_msg(model_name + " Training")
         if model_name != 'NaiveBayes':
             cur_pipe = hyper_tuning(models[model_name], scoring_metrics, params[model_name])
         else:
@@ -114,6 +118,7 @@ def main(train, scoring_metrics, out_dir):
         # obtain best parameter set except NaiveBayes
         if model_name != 'NaiveBayes':
             print(cur_pipe.best_params_)
+        print_msg(model_name + " Training Completed")
 
         
         
@@ -121,6 +126,8 @@ def main(train, scoring_metrics, out_dir):
     cv_result = pd.concat(cross_val_results, axis=1)
     print(cv_result)
     cv_result.to_csv(out_dir + '/cv_result.csv')
+
+    print_msg("Model Training Completed - End of Training")
 
     
 
