@@ -141,7 +141,7 @@ def main(test, out_dir):
         plt.savefig(out_dir + 'Confusion_Matrix_'+ model_name+'.png')
         plt.clf()
     print_msg("Confusion Matrix Plotting Completed")
-        
+     
     score_df = pd.DataFrame(score_dict, index=["Recall", "Precision", "F1", "Accuracy"])
     print(score_df)
     score_df.to_csv(out_dir + 'score_on_test.csv')
