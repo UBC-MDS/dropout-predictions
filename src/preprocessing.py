@@ -230,7 +230,7 @@ def main(input_path, sep, test_size, random_state, output_path):
     
     '''
     df = pd.read_csv(input_path, sep=sep)
-
+    print(df.shape)
     print_msg("Begin General Preprocessing")
     df = generalPreprocessing(df)
     print_msg("Finish General Preprocessing")

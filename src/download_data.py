@@ -3,7 +3,6 @@
 
 """
 A script that downloads data in website and unzip to the location user specify and get data.csv file.
-
 Usage: src/download_data.py --url=<url> --extract_to=<extract_to> 
  
 Options:
@@ -51,6 +50,7 @@ def main(url, extract_to):
     except Exception as req:
         print_msg(req)
         print_msg("Website at the provided url does not exist")
+
 
 
     data = pd.read_csv(url, header=None) # reading the data in a pandas dataframe

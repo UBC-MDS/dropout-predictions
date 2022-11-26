@@ -4,7 +4,7 @@
 """
 A script that test and plot the result for best model and store it under the results/ folder.
 
-Usage: src/testing.py --test=<test> --out_dir=<out_dir>
+Usage: src/model_result.py --test=<test> --out_dir=<out_dir>
  
 Options:
 --test=<test>        Input path for the test dataset
@@ -13,7 +13,7 @@ Options:
 """
 
 # Example:
-# python testing.py --test="../data/processed/test.csv" --out_dir="../results/"
+# python model_result.py --test="../data/processed/test.csv" --out_dir="../results/"
 
 # import
 from docopt import docopt
@@ -113,9 +113,7 @@ def main(test, out_dir):
     for model_name in models:
         y_test = test_df["Target"]
         
-        # report = get_result(models[model_name], X_test, y_test)
-        # df = pd.DataFrame(report).transpose()
-        # print(df)
+        
         y_predict = models[model_name].predict(X_test)
 
         score_dict[0][model_name] = (recall_score(y_test, y_predict))
@@ -134,7 +132,7 @@ def main(test, out_dir):
         y_test = y_test.replace({'Target': target_dict})
         y_test = y_test.Target.tolist()
 
-        cm_df = pd.DataFrame(confusion_matrix(y_test, y_predict),['Graduate', 'Dropout'],['Graduate', 'Dropout'])                      
+        cm_df = pd.DataFrame(confusion_matrix(y_test, y_predict),['Dropout', 'Graduate'],['Dropout', 'Graduate'])                      
         plt.figure(figsize=(10,6))  
         sns.heatmap(cm_df, annot=True, cmap="crest", fmt='d').set(title='Confusion Matrix ' + model_name)
 
@@ -173,33 +171,6 @@ def plot_x_y(x_data, y_data, label):
     '''
     plt.plot(x_data, y_data, label=label)
     return plt
-
-def get_result(final_model, test_x, test_y):
-    '''
-    This function will plot the given x & y data using line plot
-    
-    Parameters
-    ----------
-    final_model : sklearn model
-        given model from sklearn
-
-    test_x : np.array
-        X axis data
-
-    test_y : np.array
-        Y axis data
-     
-    Returns
-    -------
-    classification report
-
-    Examples
-    --------
-    >>> get_result(final_model, test_x, test_y)
-    '''
-    return classification_report(test_y, final_model.predict(test_x), 
-        target_names=["Graduate", "Drop"], output_dict=True)
-
 
 if __name__ == "__main__":
     main(opt["--test"], opt["--out_dir"])
