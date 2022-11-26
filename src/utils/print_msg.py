@@ -9,6 +9,14 @@ Options:
 
 
 def print_msg(msg):
+    '''
+    Print a message with format
+    
+    Parameters
+    ----------
+    msg : str
+        str for printing
+    '''
     print("="*60)
     print("\t"+msg)
     print("="*60)
