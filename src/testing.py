@@ -1,10 +1,10 @@
-# Author: Andy Wang
-# Date: 2022-11-23
+# Author: Andy Wang, Ranjit Sundaramurthi, Caesar
+# Date: 2022-11-25
 
 """
-A script that test and plot the result for best model and store it under the result/ folder.
+A script that test and plot the result for best model and store it under the results/ folder.
 
-Usage: src/testing.py --test=<test> --out_dir=<out_dir>
+Usage: src/test_all_model.py --test=<test> --out_dir=<out_dir>
  
 Options:
 --test=<test>        Input path for the test dataset
@@ -13,20 +13,20 @@ Options:
 """
 
 # Example:
-# python testing.py --test="../data/processed/test.csv" --out_dir="../result/"
+# python test_all_model.py --test="../data/processed/test.csv" --out_dir="../results/"
 
 # import
 from docopt import docopt
-import requests, zipfile
-from io import BytesIO
-import os
 import pickle
 import pandas as pd
-from scipy.stats import lognorm, loguniform, randint
-from sklearn.model_selection import cross_validate
+
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+from sklearn.metrics import roc_curve
 from sklearn.metrics import classification_report
 from sklearn.metrics import precision_recall_curve
+from sklearn.metrics import confusion_matrix
+
+import seaborn as sns
 import matplotlib.pyplot as plt
 
 opt = docopt(__doc__) # This would parse into dictionary in python
@@ -36,28 +36,77 @@ def main(test, out_dir):
     test_df = pd.read_csv(test)
     X_test, y_test = test_df.drop(columns=["Target"]), test_df["Target"]
 
-    # get the best model 
-    file1 = open('../result/model_try', 'rb')
-    final_model_log = pickle.load(file1)
-    
-    plot_model(final_model_log, X_test, y_test, 'Logistic Regression')
-    plt.savefig('../result/log-reg.png')
+    models = {'logisticRegression': '',
+              'NaiveBayes': '',
+              'RandomForestClassifier': ''}
+    for model_name in models:
+        cur_file = open(out_dir + 'model_' + model_name, 'rb')
+        cur_final_model = pickle.load(cur_file)
+        models[model_name] = cur_final_model
+    print(models)
 
-    # get the score
-    pred = get_result(final_model_log, X_test, y_test)
-    result_log = open(out_dir + '/result_log', 'wb')
-    pickle.dump(pred, result_log)
-    result_log.close()
     
-def plot_model(final_model, test_x, test_y, name):
-    precision, recall, thresholds = precision_recall_curve(
-    test_y, final_model.predict_proba(test_x)[:, 1])
+    # plot PR curve
+    for model_name in models:
+        precision, recall, thresholds = precision_recall_curve(
+                                    y_test, models[model_name].predict_proba(X_test)[:, 1])
+        plot_x_y(precision, recall, model_name)
 
-    plot = plt.plot(precision, recall, label=name)
-    return plot
+    plt.title("PR curve")
+    plt.xlabel("Precision")
+    plt.ylabel("Recall")
+    plt.legend(loc="lower left")
+    plt.savefig(out_dir + 'PR_curve.png')
+
+    # clean plot
+    plt.clf()
+
+
+    for model_name in models:
+        if model_name != 'logisticRegression':
+            fpr, tpr, thresholds = roc_curve(y_test, models[model_name].predict_proba(X_test)[:, 1])
+        else:
+            fpr, tpr, thresholds = roc_curve(y_test, models[model_name].decision_function(X_test))
+        plot_x_y(fpr, tpr, model_name)
+    plt.title("ROC curve")
+    plt.xlabel("FPR")
+    plt.ylabel("TPR")
+    plt.legend(loc="lower right")
+    plt.savefig(out_dir + 'ROC_curve.png')
+
+    # clean plot
+    plt.clf()
+    
+    for model_name in models:
+        y_test = test_df["Target"]
+        # report = get_result(models[model_name], X_test, y_test)
+        # df = pd.DataFrame(report).transpose()
+        # print(df)
+        y_predict = models[model_name].predict(X_test)
+        y_predict = pd.DataFrame(y_predict, columns=['Target'])
+        y_test = pd.DataFrame(y_test, columns=['Target'])
+
+        target_dict = {0: 'Graduate', 1: 'Dropout'}
+
+        y_predict = y_predict.replace({'Target': target_dict})
+        y_predict = y_predict.Target.tolist()
+        y_test = y_test.replace({'Target': target_dict})
+        y_test = y_test.Target.tolist()
+
+        cm_df = pd.DataFrame(confusion_matrix(y_test, y_predict),['Graduate', 'Dropout'],['Graduate', 'Dropout'])                      
+        plt.figure(figsize=(10,6))  
+        sns.heatmap(cm_df, annot=True, cmap="crest", fmt='d').set(title='Confusion Matrix ' + model_name)
+
+        plt.savefig(out_dir + 'Confusion_Matrix_'+ model_name+'.png')
+        plt.clf()
+
+def plot_x_y(x_data, y_data, label):
+    plt.plot(x_data, y_data, label=label)
+    return plt
 
 def get_result(final_model, test_x, test_y):
-    return classification_report(test_y, final_model.predict(test_x), target_names=["Graduate", "Drop"])
+    return classification_report(test_y, final_model.predict(test_x), 
+        target_names=["Graduate", "Drop"], output_dict=True)
 
 
 if __name__ == "__main__":
