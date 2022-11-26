@@ -5,7 +5,7 @@
 A script that train all the models, and find the best model (for those model having hyperparameter tuning).
 Finally, storing all the model, cv result under the results/ folder.
 
-Usage: src/training.py --train=<train> --scoring_metrics=<scoring_metrics> --out_dir=<out_dir>
+Usage: src/model_training.py --train=<train> --scoring_metrics=<scoring_metrics> --out_dir=<out_dir>
  
 Options:
 --train=<train>                     Input path for the train dataset
@@ -15,7 +15,7 @@ Options:
 """
 
 # Example:
-# python training.py --train="../data/processed/train.csv" --scoring_metrics="f1" --out_dir="../results/"
+# python model_training.py --train="../data/processed/train.csv" --scoring_metrics="f1" --out_dir="../results/"
 
 # import
 from docopt import docopt
