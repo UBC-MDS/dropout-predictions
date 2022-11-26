@@ -82,9 +82,10 @@ and run the following commands `bash data_analysis_pipeline.sh` under `src` fold
     # model testing
     python model_result.py --test="../data/processed/test.csv" --out_dir="../results/"
 
-    # generate final report 
-    Rscript -e 'rmarkdown::render("../doc/The_Report_of_Dropout_Prediction.Rmd")'
-  
+> conda deactivate
+> Rscript -e 'rmarkdown::render("../doc/The Report of Dropout Prediction.Rmd")'
+
+
 ## License
 
 The Student Dropout Predictor materials here are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) license. This allows for the sharing and adaptation of the datasets for our purpose of academic study and understanding, with the appropriate credit given.
