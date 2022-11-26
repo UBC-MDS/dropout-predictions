@@ -82,6 +82,7 @@ and run the following commands `bash data_analysis_pipeline.sh` under `src` fold
     python model_result.py --test="../data/processed/test.csv" --out_dir="../results/"
 
     # generate final report 
+    Rscript -e 'rmarkdown::render("../doc/The_Report_of_Dropout_Prediction.Rmd")'
   
 ## License
 
