@@ -4,7 +4,7 @@
 """
 A script that test and plot the result for best model and store it under the results/ folder.
 
-Usage: src/test_all_model.py --test=<test> --out_dir=<out_dir>
+Usage: src/testing.py --test=<test> --out_dir=<out_dir>
  
 Options:
 --test=<test>        Input path for the test dataset
@@ -13,7 +13,7 @@ Options:
 """
 
 # Example:
-# python test_all_model.py --test="../data/processed/test.csv" --out_dir="../results/"
+# python testing.py --test="../data/processed/test.csv" --out_dir="../results/"
 
 # import
 from docopt import docopt
