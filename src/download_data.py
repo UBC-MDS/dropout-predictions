@@ -52,8 +52,9 @@ def main(url, extract_to):
         print_msg("Website at the provided url does not exist")
 
 
-    data = pd.read_csv(url) # reading the data in a pandas dataframe
-    print(data)
+
+    data = pd.read_csv(url, header=None) # reading the data in a pandas dataframe
+
     # Save the data as a csv file to the targetted path.
     try:
         print_msg("Loading CSV Started")
