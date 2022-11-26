@@ -13,7 +13,7 @@ Options:
 """
 
 # Example:
-# python training.py --train="../data/processed/train.csv" --out_dir="../result/"
+# python training.py --train="../data/processed/train.csv" --out_dir="../results/"
 
 # import
 from docopt import docopt
@@ -69,10 +69,9 @@ def main(train, out_dir):
         os.makedirs(os.path.dirname(out_dir))
         file_log = open(out_dir + "/model_try_Naive_Bayes", "wb")
 
-    pickle.dump(final_model_log, file_log)
 
     file_model_result = open(out_dir + "/model_try_Naive_Bayes", "wb")
-    pickle.dump(cross_val_results, file_model_result)
+    pickle.dump(final_model_log, file_model_result)
 
 
 def output_object(best_model, result_dict, train_x, train_y):
