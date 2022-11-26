@@ -26,6 +26,7 @@ import pandas as pd
 
 from sklearn.compose import  make_column_transformer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from utils.print_msg import print_msg # adding utils function for print msg
 
 
 opt = docopt(__doc__) # This would parse into dictionary in python
@@ -100,6 +101,30 @@ def generalPreprocessing(df):
     return df
 
 def columnTransformation(train_df, test_df):
+    '''
+    Perform column transformation (OHE, standard scaling, binary variable encoding) on the given data
+    
+    Parameters
+    ----------
+    train_df : pd.DataFrame
+        training data
+
+    test_df : pd.DataFrame
+        testing data
+    
+    Returns
+    -------
+    transformed_train_df : pd.DataFrame
+        column transformed training data
+
+    transformed_test_df : pd.DataFrame
+        column transformed testing data
+
+    Examples
+    --------
+    >>> transformed_train_df, transformed_test_df = columnTransformation(train_df, test_df)
+    
+    '''
 # perform column transformation
     # - binary
     # - categorical (OHE)
@@ -168,17 +193,54 @@ def columnTransformation(train_df, test_df):
     return transformed_train_df, transformed_test_df
 
 def main(input_path, sep, test_size, random_state, output_path):
+    '''
+    main function for the preprocessing script
+    1. Data dropping
+    2. Data arrange column
+    3. column transformation
+
+    Parameters
+    ----------
+    input_path : str
+        input file path
+
+    sep : str
+        separator for read_csv
+
+    test_size : str --> float
+        testing size for train_test_split
+
+    random_state : str --> int
+        random state for read_csv
+
+    output_path : str
+        output file path
     
+    Returns
+    -------
+    <None>
+    save 3 csv to output_path
+    - train_eda.csv
+    - train.csv
+    - test.csv
+
+    Examples
+    --------
+    >>> main(opt["--input_path"], opt["--sep"], opt["--test_size"], opt["--random_state"], opt["--output_path"])
+    
+    '''
     df = pd.read_csv(input_path, sep=sep)
 
+    print_msg("Begin General Preprocessing")
     df = generalPreprocessing(df)
-
+    print_msg("Finish General Preprocessing")
     # data splitting
     train_df, test_df = train_test_split(df, test_size=float(test_size), random_state=int(random_state))
 
     print("train shape : ")
     print(train_df.shape)
 
+    print_msg("Storing Data")
     # storing EDA ready dataset (1. dropped 'enrolled', 2. Fixed column typo, 3. dropna)
     train_df.to_csv(output_path + '/train_eda.csv', index=False)
 
@@ -188,7 +250,7 @@ def main(input_path, sep, test_size, random_state, output_path):
     transformed_train_df.to_csv(output_path + '/train.csv', index=False)
     transformed_test_df.to_csv(output_path + '/test.csv', index=False)
 
-    print("Finished preprocessing")
+    print_msg("Data Storing Completed - End of Preprocessing")
 
     
 

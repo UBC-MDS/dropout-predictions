@@ -35,18 +35,46 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from utils.print_msg import print_msg # adding utils function for print msg
+
 
 # logistic regression and random forest
 opt = docopt(__doc__) # This would parse into dictionary in python
 
 def main(train, scoring_metrics, out_dir):
+    '''
+    Run hyperparameter optimization on logistic regression and random forest,
+    Naive Bayes dont have search CV
+    Perform model training & saving
     
+    Parameters
+    ----------
+    train : str
+        training data path
+
+    scoring_metrics : str
+        scoring metrics name, e.g. 'f1', 'recall'
+
+    out_dir : str
+        output directory path
+     
+    Returns
+    -------
+    store 3 model to results/ folder
+        
+
+    Examples
+    --------
+    >>> main(opt["--train"], opt["--scoring_metrics"], opt["--out_dir"])
+    '''
+    print_msg("Begin Model Training")
     cross_val_results = {}
     # get training data
     train_df = pd.read_csv(train)
     X_train, y_train = train_df.drop(columns=["Target"]), train_df["Target"]
 
 
+    # initialize our selected model
     models = {'logisticRegression': LogisticRegression(random_state=123, max_iter=1000),
               'NaiveBayes': GaussianNB(),
               'RandomForestClassifier': RandomForestClassifier()}
@@ -68,7 +96,9 @@ def main(train, scoring_metrics, out_dir):
                                     }         
             }
     
+    # for each model 
     for model_name in models:
+        print_msg(model_name + " Training")
         if model_name != 'NaiveBayes':
             cur_pipe = hyper_tuning(models[model_name], scoring_metrics, params[model_name])
         else:
@@ -88,6 +118,7 @@ def main(train, scoring_metrics, out_dir):
         # obtain best parameter set except NaiveBayes
         if model_name != 'NaiveBayes':
             print(cur_pipe.best_params_)
+        print_msg(model_name + " Training Completed")
 
         
         
@@ -96,11 +127,35 @@ def main(train, scoring_metrics, out_dir):
     print(cv_result)
     cv_result.to_csv(out_dir + '/cv_result.csv')
 
+    print_msg("Model Training Completed - End of Training")
+
     
 
 # create hyper tuning search sklearn object
 def hyper_tuning(model, scoring_metrics, param_dist):
+    '''
+    return the randomized search object
     
+    Parameters
+    ----------
+    model : sklearn.model
+        dummy model
+
+    scoring_metrics : str
+        scoring metrics name, e.g. 'f1', 'recall'
+
+    param_dist : dict
+        hyperparameter distribution for randomized search
+     
+    Returns
+    -------
+    random_search : sklearn randomized search cv
+        
+
+    Examples
+    --------
+    >>> cur_pipe = hyper_tuning(models[model_name], scoring_metrics, params[model_name])
+    '''
     # output the best model to local
     random_search = RandomizedSearchCV(
                                         model,
@@ -116,6 +171,33 @@ def hyper_tuning(model, scoring_metrics, param_dist):
     return random_search
      
 def output_object(best_model, train_x, train_y, scoring_metrics):
+    '''
+    given the best model, scoring metrics and training data, 
+    return the aggregated (mean, std) cross_validate result
+    
+    Parameters
+    ----------
+    best_model : sklearn.model
+        best performing model / dummy model
+
+    train_x : pd.DataFrame
+        feature of the training data
+
+    train_y : pd.DataFrame
+        target of the training data
+
+    scoring_metrics : str
+        scoring metrics name, e.g. 'f1', 'recall'
+    
+    Returns
+    -------
+    pd.DataFrame
+        a dataframe of the aggregated cross_validate result
+
+    Examples
+    --------
+    >>> cross_val_results[model_name] = output_object(cur_pipe, X_train, y_train, scoring_metrics)
+    '''
     return pd.DataFrame(cross_validate(
                         best_model, train_x, train_y, return_train_score=True, 
                         scoring=scoring_metrics)

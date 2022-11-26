@@ -4,7 +4,7 @@
 """
 A script that test and plot the result for best model and store it under the results/ folder.
 
-Usage: src/test_all_model.py --test=<test> --out_dir=<out_dir>
+Usage: src/testing.py --test=<test> --out_dir=<out_dir>
  
 Options:
 --test=<test>        Input path for the test dataset
@@ -13,7 +13,7 @@ Options:
 """
 
 # Example:
-# python test_all_model.py --test="../data/processed/test.csv" --out_dir="../results/"
+# python testing.py --test="../data/processed/test.csv" --out_dir="../results/"
 
 # import
 from docopt import docopt
@@ -28,10 +28,35 @@ from sklearn.metrics import confusion_matrix
 
 import seaborn as sns
 import matplotlib.pyplot as plt
+from utils.print_msg import print_msg # adding utils function for print msg
+
 
 opt = docopt(__doc__) # This would parse into dictionary in python
 
 def main(test, out_dir):
+    '''
+    read all the stored model generated from training.py
+    Predict the y_test data
+    Generate confusion matrix, ROC curve, PR curve
+    
+    Parameters
+    ----------
+    test : str
+        testing data path
+
+    out_dir : str
+        output directory path
+     
+    Returns
+    -------
+    store 2 curve plot (ROC, PR)
+    store 3 confusion matrix png
+
+    Examples
+    --------
+    >>> main(opt["--train"], opt["--scoring_metrics"], opt["--out_dir"])
+    '''
+    print_msg("Begin Model Testing")
     # get test data
     test_df = pd.read_csv(test)
     X_test, y_test = test_df.drop(columns=["Target"]), test_df["Target"]
@@ -47,6 +72,7 @@ def main(test, out_dir):
 
     
     # plot PR curve
+    print_msg("PR Curve Plotting")
     for model_name in models:
         precision, recall, thresholds = precision_recall_curve(
                                     y_test, models[model_name].predict_proba(X_test)[:, 1])
@@ -60,8 +86,10 @@ def main(test, out_dir):
 
     # clean plot
     plt.clf()
+    print_msg("PR Curve Plotting Completed")
 
-
+    print_msg("ROC Curve Plotting")
+    # plotting ROC curve
     for model_name in models:
         if model_name != 'logisticRegression':
             fpr, tpr, thresholds = roc_curve(y_test, models[model_name].predict_proba(X_test)[:, 1])
@@ -76,7 +104,10 @@ def main(test, out_dir):
 
     # clean plot
     plt.clf()
+    print_msg("ROC Curve Plotting Completed")
     
+    # plotting confusion matrix 
+    print_msg("Confusion Matrix Plotting")
     for model_name in models:
         y_test = test_df["Target"]
         # report = get_result(models[model_name], X_test, y_test)
@@ -99,12 +130,59 @@ def main(test, out_dir):
 
         plt.savefig(out_dir + 'Confusion_Matrix_'+ model_name+'.png')
         plt.clf()
+    print_msg("Confusion Matrix Plotting Completed")
+    print_msg("Model Testing Completed - End of Testing")
 
 def plot_x_y(x_data, y_data, label):
+    '''
+    This function will plot the given x & y data using line plot
+    
+    Parameters
+    ----------
+    x_data : np.array
+        X axis data
+
+    y_data : np.array
+        Y axis data
+
+    label : str
+        label string for plotting (model name)
+     
+    Returns
+    -------
+    plt : matplotlib object
+        for plotting purposes
+
+    Examples
+    --------
+    >>> plot_x_y(x_data, y_data, label)
+    '''
     plt.plot(x_data, y_data, label=label)
     return plt
 
 def get_result(final_model, test_x, test_y):
+    '''
+    This function will plot the given x & y data using line plot
+    
+    Parameters
+    ----------
+    final_model : sklearn model
+        given model from sklearn
+
+    test_x : np.array
+        X axis data
+
+    test_y : np.array
+        Y axis data
+     
+    Returns
+    -------
+    classification report
+
+    Examples
+    --------
+    >>> get_result(final_model, test_x, test_y)
+    '''
     return classification_report(test_y, final_model.predict(test_x), 
         target_names=["Graduate", "Drop"], output_dict=True)
 
