@@ -82,8 +82,9 @@ and run the following commands `bash data_analysis_pipeline.sh` under `src` fold
     # model testing
     python model_result.py --test="../data/processed/test.csv" --out_dir="../results/"
 
-> conda deactivate
-> Rscript -e 'rmarkdown::render("../doc/The Report of Dropout Prediction.Rmd")'
+> `conda deactivate`
+
+> `Rscript -e 'rmarkdown::render("../doc/The Report of Dropout Prediction.Rmd")'`
 
 
 ## License
