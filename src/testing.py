@@ -113,9 +113,7 @@ def main(test, out_dir):
     for model_name in models:
         y_test = test_df["Target"]
         
-        # report = get_result(models[model_name], X_test, y_test)
-        # df = pd.DataFrame(report).transpose()
-        # print(df)
+        
         y_predict = models[model_name].predict(X_test)
 
         score_dict[0][model_name] = (recall_score(y_test, y_predict))
@@ -173,33 +171,6 @@ def plot_x_y(x_data, y_data, label):
     '''
     plt.plot(x_data, y_data, label=label)
     return plt
-
-def get_result(final_model, test_x, test_y):
-    '''
-    This function will plot the given x & y data using line plot
-    
-    Parameters
-    ----------
-    final_model : sklearn model
-        given model from sklearn
-
-    test_x : np.array
-        X axis data
-
-    test_y : np.array
-        Y axis data
-     
-    Returns
-    -------
-    classification report
-
-    Examples
-    --------
-    >>> get_result(final_model, test_x, test_y)
-    '''
-    return classification_report(test_y, final_model.predict(test_x), 
-        target_names=["Graduate", "Drop"], output_dict=True)
-
 
 if __name__ == "__main__":
     main(opt["--test"], opt["--out_dir"])
