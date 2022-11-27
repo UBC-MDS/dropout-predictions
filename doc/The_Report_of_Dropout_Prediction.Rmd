@@ -7,7 +7,7 @@ output:
     toc: true
 bibliography: dropout_prediction_references.bib
 ---
-# Library used
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
@@ -16,15 +16,30 @@ library(knitr)
 ```
 
 
+```{r load model test results, message=FALSE, warning=FALSE, echo=FALSE}
+test_result <- read_csv('../results/score_on_test.csv')
+colnames(test_result) <- c("Item","LogisticRegression", 
+                           "NaiveBayes","RandomForest"
+                          )
+
+```
+
+```{r load model results, message=FALSE, warning=FALSE, echo=FALSE}
+cv_result <- read_csv("../results/cv_result.csv")
+colnames(cv_result) <- c("Item", rep("LogisticRegression", 2), 
+                          rep("NaiveBayes", 2),
+                          rep("RandomForest", 2)
+                          )
+```
 
 # Summary
-Classification task performed through machine learning algorithms deals which recognizing and grouping ideas into categories. These algorithms are used to detect patterns within existing datasets to help classify unseen and upcoming data. In this project 3 classification algorithms, `Naive Bayes`, `Logistic Regression`, `Random Forest Classifier` were used on a real-life dataset, to solve a two class classification problem. The performance of these 3 algorithms was compared through the classification metrics of `Recall` and `F1 score`. The `Random Forest Classifier` and `Logistic Regression` algorithms performed appreciably with a high recall score of 0.95 and 0.94 respectively. The selection and further optimization of the best performing algorithm is planned for the future milestones of this project.
+Classification task performed through machine learning algorithms deals which recognizing and grouping ideas into categories. These algorithms are used to detect patterns within existing datasets to help classify unseen and upcoming data. In this project 3 classification algorithms, `Naive Bayes`, `Logistic Regression`, `Random Forest Classifier` were used on a real-life dataset, to solve a two class classification problem. The performance of these 3 algorithms was compared through the classification metrics of `Recall`. The `Random Forest Classifier` and `Logistic Regression` algorithms performed appreciably with a high recall score of `r round(test_result[[1,4]], 2)` and `r round(test_result[[1,2]], 2)`  respectively. The selection and further optimization of the best performing algorithm is planned for the future milestones of this project.
 
 
 # Introduction
 Academic performance/graduation in a population is an important factor in their overall employability which contributes towards economic development.Student Dropout given the factors on demography, socioeconomics, macroeconomics, and relevant academic data provided by the Student on enrollment. This prediction is important to understand the student's academic capacity. This important knowledge can be used to identify key areas of development such as the development of socially disadvantaged communities, improvement of academic programs, development of educational funding programs, etc. This project will try to investigate the following research questions:
-1. Given a student with his/her demography, socioeconomics, macroeconomics, and relevant academic data, how accurately can we predict whether he/she will drop out of school?
-2. What are the main factors contributing to the student dropout rate?
+
+1. Given a student with his/her demography, socioeconomics, macroeconomics, and relevant academic data, how accurately can we predict whether he/she will drop out of school?  
 
 
 # Methods
@@ -35,8 +50,7 @@ The original dataset exhibits three classifications (class) of students - Gradua
 
 
 
-## Analysis
-### Modeling
+## Modeling
 The insights gained from the EDA, provided a foundation to explore multiple classification algorithms. Naive Bayes, Logistic Regression and Random Forest Classifier were implemented for their respective advantages in machine learning projects. These three algorithms provide a nice selection on the spectrum of simple (Naive Bayes) to more complex (Random Forest Classifier) algorithm. The Naive Bayes algorithm is advantageous as a simple probabilistic classification algorithm which assumes naively the independence between the features. Despite this assumption, the Naive Bayes algorithm known to be perform well on classification problems. The absence of hyperparameters and the convenient scalability with increase in training dataset, made Naive Bayes algorithm a favorable choice for this project. However, Naive Bayes algorithm falls short in terms of interpretability of features based on results. This is where the Logistic Regression algorithm shines with its ability to provide interpretable feature importances while retaining the model simplicity. The model parameters of `class weight` and the `regularization (inverse) C` were utilized to iteratively tune the performance. However Logistic Regression assumes there is inherent linearity between our features and the classification target. We are interested to implement an algorithm which overcomes this limitation and this led us to the selection of the Random Forest Classifier algorithm. Random Forest Classifier leverages ensemble learning through multiple Decision Trees, which reduces the tendency of overfitting to the training data. This is especially useful when the number of records (train examples) are limited as is the case in our project. This made Random Forest a favorable choice for our project. The parameters of `max_features`, `max_depth`, `min_samples_leaf`, and `min_samples_leaf` were optimized through `RandomSearchCV`. The Python 3 programming language [@van1995python] and the following Python packages were used to perform the analysis: Scikit-learn [@pedregosa2011scikit], Numpy [@harris2020array], Pandas [@mckinney2010data],  Seaborn [@waskom2017mwaskom], Altair[@vanderplas2018altair], Matplotlib[@tosi2009matplotlib]; And the following external resources: The Origins of Logistic Regression [@cramer2002origins], Random Forests [@breiman2001random], Predict students' dropout and academic success data set [@misc_predict_students], related research article [@realinho2022predicting] 
 
 The code to perform the analysis and create the report can be found [here](https://github.com/UBC-MDS/dropout-predictions)
@@ -75,18 +89,11 @@ The density plot reveals the gender imbalance in our data set with the number of
 ## Modeling
 The objective of this project is to investigate how accurately we can predict that a student will drop out of school. Furthermore what underlying factors are the predominant influencing this outcome? Accurate classification of a true drop out in the available data is our chosen metric of interest. This is defined as `Recall` and it represents the proportion of the true drop-outs in the dataset, accurately predicted by the model. Each of the three models Naive Bayes, Logistic Regression and Random Forest Classifier were fitted on training data. The hyperparameter tuning was performed on using `Random Search CV` for Logistic Regression and Random Forest Classifier. The optimized models were then used to predict the classification on the test data. The performance of the models was compared through the Confusion Matrix, Precision-Recall curve, and Receive-Operating Characteristics plots. The metrics were tabulated for numerical interpretation.
 
-Our train-test split yielded 726 examples in the testing dataset. There are 425 actual class `Dropout` and the rest are `Graduate`. The classification as a `Dropout` is considered a True Positive in the context of this project. The `Random Forest Classifier` model identified the highest True positives among the three models (402) and achieved a superior recall metric of 0.95. `Naive Bayes` model came close behind with 400 true positives at a recall metric of 0.94. The `Logistic Regression` model achieved an appreciable recall metric of 0.91 with 386 true positive. 
-
-
+Our train-test split yielded 726 examples in the testing dataset. There are 425 actual class `Dropout` and the rest are `Graduate`. The classification as a `Dropout` is considered a True Positive in the context of this project. The `Logistic Regression` model identified the highest True positives among the three models (386) and achieved a superior recall metric of `r round(test_result[[1,2]], 2)`. `Naive Bayes` model came close behind with 400 true positives at a recall metric of `r round(test_result[[1,3]], 2)`. The `Random Forest` model achieved an appreciable recall metric of `r round(test_result[[1,4]], 2)` with 402 true positive. Overall, the `Logistic Regression` model result in the highest recall score (`r round(test_result[[1,2]], 2)`) and since we focus on the recall score (those who drop out of school), therefore, we conclude that the `Logistic Regression` model perform the best in terms of recall.
 
 The `Random Forest Classifier` and `Logistic Regression` performed appreciably on the `f1` score which is a balanced measure of model `precision` and `recall`. However Naive Bayes suffered a relative low `f1` score due to a low `precision`. This is due to more False Positives predicted by `Naive Bayes` than the other models. The corresponding confusion matrices derived from the analysis are shown below for reference.
 
-```{r load model test results, message=FALSE, warning=FALSE, echo=FALSE}
-test_result <- read_csv('../results/score_on_test.csv')
-colnames(test_result) <- c("Item","LogisticRegression", 
-                           "NaiveBayes","RandomForest"
-                          )
-
+```{r print model test results, message=FALSE, warning=FALSE, echo=FALSE}
 knitr::kable(test_result, caption = "Table 1. Testing Score Results")|>
     kableExtra::kable_styling(full_width = FALSE)
 
@@ -115,7 +122,7 @@ knitr::include_graphics("../results/ROC_curve.png")
 ```
 
 
-```{r load model results, message=FALSE, warning=FALSE, echo=FALSE}
+```{r print model results, message=FALSE, warning=FALSE, echo=FALSE}
 cv_result <- read_csv("../results/cv_result.csv")
 colnames(cv_result) <- c("Item", rep("LogisticRegression", 2), 
                           rep("NaiveBayes", 2),
@@ -128,5 +135,21 @@ knitr::kable(cv_result, caption = "Table 2. Cross Validation Results")|>
     
 The current analysis is performed using the features selected post EDA through human judgement based on the project context. Both the models `Logistic Regression` and `Random Forest Classifier` have a small number of False Negatives. These are students who are actually `Dropout` but were incorrectly classified as `Graduate` by the models. In the context of this project, it is our endeavor to minimize these False Negatives as much as possible. The further steps will involve investigative methodologies such as `Feature Selection` and `Feature Engineering` to reduce the False Negatives and further improve the performance.    
 
+# Limitations
+Even though we performed serval machine learning processes to improve our workflow, the current project faces the following limitations:
+
+- Only three models have been selected for model comparison  
+- Further feature engineering is required to obtain different potential useful features  
+- Some of the features are dropped at the early stage that might be a useful features in the feature engineering stage (e.g. combination of different features) 
+- Limited iterations in the randomized search, there could be some parameter values with better performance that the current search has not covered
+
+# Future Directions
+Based on the limitation listed above, we can imporve our project by the following directions:
+
+- Further `Feature Selection` & `Feature Engineering` is needed. Train the model using different feature sets, we can explore different combination of the features and perform different transformation, for example, polynomial transformation  
+- Use a variety of model to compare the performance, such that the comparison will be more comprehensive  
+- Increase the iteration in randomized search in order to search for more potentially beneficial parameter values  
+- Increase code modularization by using object oriented programming  
+- Adopt better code logging practice instead of using the print function  
 
 # References
