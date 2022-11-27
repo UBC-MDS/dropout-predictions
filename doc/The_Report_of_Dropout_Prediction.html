@@ -616,16 +616,12 @@ pre code {
 
 <div id="TOC">
 <ul>
-<li><a href="#library-used" id="toc-library-used">Library used</a></li>
 <li><a href="#summary" id="toc-summary">Summary</a></li>
 <li><a href="#introduction" id="toc-introduction">Introduction</a></li>
 <li><a href="#methods" id="toc-methods">Methods</a>
 <ul>
 <li><a href="#data" id="toc-data">Data</a></li>
-<li><a href="#analysis" id="toc-analysis">Analysis</a>
-<ul>
 <li><a href="#modeling" id="toc-modeling">Modeling</a></li>
-</ul></li>
 </ul></li>
 <li><a href="#results-discussion" id="toc-results-discussion">Results
 &amp; Discussion</a>
@@ -633,13 +629,13 @@ pre code {
 <li><a href="#eda" id="toc-eda">EDA</a></li>
 <li><a href="#modeling-1" id="toc-modeling-1">Modeling</a></li>
 </ul></li>
+<li><a href="#limitations" id="toc-limitations">Limitations</a></li>
+<li><a href="#future-directions" id="toc-future-directions">Future
+Directions</a></li>
 <li><a href="#references" id="toc-references">References</a></li>
 </ul>
 </div>
 
-<div id="library-used" class="section level1">
-<h1>Library used</h1>
-</div>
 <div id="summary" class="section level1">
 <h1>Summary</h1>
 <p>Classification task performed through machine learning algorithms
@@ -650,10 +646,9 @@ algorithms, <code>Naive Bayes</code>, <code>Logistic Regression</code>,
 <code>Random Forest Classifier</code> were used on a real-life dataset,
 to solve a two class classification problem. The performance of these 3
 algorithms was compared through the classification metrics of
-<code>Recall</code> and <code>F1 score</code>. The
-<code>Random Forest Classifier</code> and
+<code>Recall</code>. The <code>Random Forest Classifier</code> and
 <code>Logistic Regression</code> algorithms performed appreciably with a
-high recall score of 0.95 and 0.94 respectively. The selection and
+high recall score of 0.8 and 0.83 respectively. The selection and
 further optimization of the best performing algorithm is planned for the
 future milestones of this project.</p>
 </div>
@@ -668,11 +663,12 @@ the student’s academic capacity. This important knowledge can be used to
 identify key areas of development such as the development of socially
 disadvantaged communities, improvement of academic programs, development
 of educational funding programs, etc. This project will try to
-investigate the following research questions: 1. Given a student with
-his/her demography, socioeconomics, macroeconomics, and relevant
-academic data, how accurately can we predict whether he/she will drop
-out of school? 2. What are the main factors contributing to the student
-dropout rate?</p>
+investigate the following research questions:</p>
+<ol style="list-style-type: decimal">
+<li>Given a student with his/her demography, socioeconomics,
+macroeconomics, and relevant academic data, how accurately can we
+predict whether he/she will drop out of school?</li>
+</ol>
 </div>
 <div id="methods" class="section level1">
 <h1>Methods</h1>
@@ -701,10 +697,8 @@ examples of Graduate students and 1421 examples of Dropouts. Thus the
 dataset imbalance is not a major concern and can be addressed through
 balancing techniques learned in the MDS program.</p>
 </div>
-<div id="analysis" class="section level2">
-<h2>Analysis</h2>
-<div id="modeling" class="section level3">
-<h3>Modeling</h3>
+<div id="modeling" class="section level2">
+<h2>Modeling</h2>
 <p>The insights gained from the EDA, provided a foundation to explore
 multiple classification algorithms. Naive Bayes, Logistic Regression and
 Random Forest Classifier were implemented for their respective
@@ -744,7 +738,6 @@ academic success data set <span class="citation">(V. M. Realinho
 Valentim 2021)</span>, related research article <span class="citation">(V. Realinho et al. 2022)</span></p>
 <p>The code to perform the analysis and create the report can be found
 <a href="https://github.com/UBC-MDS/dropout-predictions">here</a></p>
-</div>
 </div>
 </div>
 <div id="results-discussion" class="section level1">
@@ -824,12 +817,17 @@ numerical interpretation.</p>
 There are 425 actual class <code>Dropout</code> and the rest are
 <code>Graduate</code>. The classification as a <code>Dropout</code> is
 considered a True Positive in the context of this project. The
-<code>Random Forest Classifier</code> model identified the highest True
-positives among the three models (402) and achieved a superior recall
-metric of 0.95. <code>Naive Bayes</code> model came close behind with
-400 true positives at a recall metric of 0.94. The
-<code>Logistic Regression</code> model achieved an appreciable recall
-metric of 0.91 with 386 true positive.</p>
+<code>Logistic Regression</code> model identified the highest True
+positives among the three models (386) and achieved a superior recall
+metric of 0.83. <code>Naive Bayes</code> model came close behind with
+400 true positives at a recall metric of 0.66. The
+<code>Random Forest</code> model achieved an appreciable recall metric
+of 0.8 with 402 true positive. Overall, the
+<code>Logistic Regression</code> model result in the highest recall
+score (0.83) and since we focus on the recall score (those who drop out
+of school), therefore, we conclude that the
+<code>Logistic Regression</code> model perform the best in terms of
+recall.</p>
 <p>The <code>Random Forest Classifier</code> and
 <code>Logistic Regression</code> performed appreciably on the
 <code>f1</code> score which is a balanced measure of model
@@ -1116,6 +1114,48 @@ investigative methodologies such as <code>Feature Selection</code> and
 <code>Feature Engineering</code> to reduce the False Negatives and
 further improve the performance.</p>
 </div>
+</div>
+<div id="limitations" class="section level1">
+<h1>Limitations</h1>
+<p>Even though we performed serval machine learning processes to improve
+our workflow, the current project faces the following limitations:</p>
+<ul>
+<li>Only three models have been selected for model comparison<br />
+</li>
+<li>Further feature engineering is required to obtain different
+potential useful features<br />
+</li>
+<li>Some of the features are dropped at the early stage that might be a
+useful features in the feature engineering stage (e.g. combination of
+different features)</li>
+<li>Limited iterations in the randomized search, there could be some
+parameter values with better performance that the current search has not
+covered</li>
+</ul>
+</div>
+<div id="future-directions" class="section level1">
+<h1>Future Directions</h1>
+<p>Based on the limitation listed above, we can imporve our project by
+the following directions:</p>
+<ul>
+<li>Further <code>Feature Selection</code> &amp;
+<code>Feature Engineering</code> is needed. Train the model using
+different feature sets, we can explore different combination of the
+features and perform different transformation, for example, polynomial
+transformation<br />
+</li>
+<li>Use a variety of model to compare the performance, such that the
+comparison will be more comprehensive<br />
+</li>
+<li>Increase the iteration in randomized search in order to search for
+more potentially beneficial parameter values<br />
+</li>
+<li>Increase code modularization by using object oriented
+programming<br />
+</li>
+<li>Adopt better code logging practice instead of using the print
+function</li>
+</ul>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
