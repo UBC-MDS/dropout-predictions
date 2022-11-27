@@ -82,7 +82,7 @@ and run the following commands `bash data_analysis_pipeline.sh` under `src` fold
 
 > `conda deactivate`
 
-> `Rscript -e 'rmarkdown::render("../doc/The Report of Dropout Prediction.Rmd")'`
+> `Rscript -e 'rmarkdown::render("../doc/The_Report_of_Dropout_Prediction.Rmd")'`
 
 
 ## License
