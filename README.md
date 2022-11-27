@@ -2,7 +2,7 @@
 
 
 * Author: Ranjit Sundaramurthi
-* contributors: Andy Wang, Caesar Wong, Ziyi Chen
+* Contributors: Andy Wang, Caesar Wong, Ziyi Chen
 
 
 
@@ -12,11 +12,9 @@
 ## Objective
 
 
-Academic performance/graduation in a population is an important factor in their overall employability which contributes towards economic development. This Data Science project predicts Student Dropout given the factors on demography, socioeconomics, macroeconomics, and relevant academic data provided by the Student on enrollment. This prediction is important to understand the student's academic capacity. This important knowledge can be used to identify key areas of development such as the development of socially disadvantaged communities, improvement of academic programs, development of educational funding programs, etc.  This project will try to investigate the following research questions:
+Academic performance/graduation in a population is an important factor in their overall employability which contributes towards economic development. This Data Science project predicts Student Dropout given the factors on demography, socioeconomics, macroeconomics, and relevant academic data provided by the Student on enrollment. This prediction is important to understand the student's academic capacity. This important knowledge can be used to identify key areas of development such as the development of socially disadvantaged communities, improvement of academic programs, development of educational funding programs, etc.  This project will try to investigate the following research question:
 
 > **Given a student with his/her demography, socioeconomics, macroeconomics, and relevant academic data, how accurately can we predict whether he/she will drop out of school?**
-
-> **What are the main factors contributing to the student dropout rate?**
 
 
 
@@ -32,7 +30,7 @@ The original dataset exhibits three classifications (class) of students - Gradua
 ## Analysis Roadmap
 
 
-We partitioned the dataset into training and test sets (80%: 20%). A detailed EDA is performed to understand the distribution of the 36 features and their correlation. The insights from EDA are used to either eliminate features to reduce redundancy. Correlation maps, Bar plots and Pairwise Scatter plots from the EDA are  used on the continuous features such as Inflation rate, GDP, and Unemployment rate to draw inferences for feature selection.    
+We partitioned the dataset into training and test sets (80%: 20%). A detailed EDA is performed to understand the distribution of the 36 features and their correlation. The insights from EDA are used to eliminate features to reduce redundancy. Correlation maps, Bar plots and Pairwise Scatter plots from the EDA are  used on the continuous features such as Inflation rate, GDP, and Unemployment rate to draw inferences for feature selection.    
 
 
 The modeling is performed using the Naive Bayes, Logistic Regression and Random Forest classification algorithms to identify the best-performing model. The Naive Bayes algorithm is shortlisted for its ability to scale well and handle sparse data. With multiple categorical features, there is sparsity in our model. The Logistic Regression algorithm is chosen for its similar advantages to the Naive Bayes algorithm along with the attractive advantage of providing interpretability for feature importance selection. The Random Forest classifier enabled us to apply ensemble models on the dataset. The performance metrics for our problem statement are `Recall` and `f1 score` respectively, in order of importance. Type 2 errors where actual dropouts are not identified reduce the usefulness of our project. Thus `Recall` is an essential performance metric. The Type 1 errors indicated by the precision of the model are of relatively lesser significance as actual graduates incorrectly classified as dropouts will provide a conservative model which is relatively acceptable.
