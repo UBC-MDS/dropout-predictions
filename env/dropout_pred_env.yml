@@ -9,7 +9,6 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - sklearn
   - jinja2
   - python-graphviz
   - lightgbm
