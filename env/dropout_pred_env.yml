@@ -25,4 +25,5 @@ dependencies:
   - vl-convert-python
   - yellowbrick
   - ipywidgets
+  - pandoc[version>='2.19.*']
 prefix: C:\ProgramData\Miniconda3\envs\dropout_pred_env
