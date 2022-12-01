@@ -54,15 +54,27 @@ There are different ways to replicate the analysis.
 
 1. Clone [this](https://github.com/UBC-MDS/dropout-predictions.git) GitHub repository
 
-```git clone https://github.com/UBC-MDS/dropout-predictions.git```
+```
+git clone https://github.com/UBC-MDS/dropout-predictions.git
+```
 
-2. Install the conda environment listed in [here](https://github.com/UBC-MDS/dropout-predictions/blob/main/env/dropout_pred_env.yml) 
+2. Navigate to the GitHub repository
 
-```conda env create -f env/dropout_pred_env.yml```
+```
+cd dropout-predictions
+```
 
-3. Activate the environment 
+3. Install the conda environment listed in [here](https://github.com/UBC-MDS/dropout-predictions/blob/main/env/dropout_pred_env.yml) 
 
-```conda activate dropout_pred_env```
+```
+conda env create -f env/dropout_pred_env.yml
+```
+
+4. Activate the environment 
+
+```
+conda activate dropout_pred_env
+```
 
 We can either use the [Makefile](#makefile) or [Shell Script](#clean-files) to run the analysis.
 
@@ -72,7 +84,9 @@ We can either use the [Makefile](#makefile) or [Shell Script](#clean-files) to r
 
 To run the whole analysis, run the following command in the root directory:
 
-```make all```
+```
+make all
+```
 
 It will check whether the [final report](doc/The_Report_of_Dropout_Prediction.html) exists or not. If the final report does not exist, the Makefile will run all the dependencies required to generate the report.
 
@@ -80,7 +94,9 @@ It will check whether the [final report](doc/The_Report_of_Dropout_Prediction.ht
 
 To clean the intermediate and final results including images, CSV files and report, run the following command in the root directory:
 
-```make clean```
+```
+make clean
+```
 
 It will clean all the files under `data/raw/`, `results/`, and all the CSV files under `data/processed/`.
 
@@ -88,7 +104,9 @@ It will clean all the files under `data/raw/`, `results/`, and all the CSV files
 
 After activating the Conda environment, run the following command under the `src` folder.
 
-```bash data_analysis_pipeline.sh```
+```
+bash data_analysis_pipeline.sh
+```
 
 - [Shell Script](src/data_analysis_pipeline.sh) content:
 
