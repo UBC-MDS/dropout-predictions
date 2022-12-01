@@ -76,7 +76,7 @@ conda env create -f env/dropout_pred_env.yml
 conda activate dropout_pred_env
 ```
 
-We can either use the [Makefile](#makefile) or [Shell Script](#clean-files) to run the analysis.
+We can either use the [Makefile](#makefile) or [Shell Script](#shell-script) to run the analysis.
 
 ### Makefile
 
