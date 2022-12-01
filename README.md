@@ -108,7 +108,7 @@ After activating the Conda environment, run the following command under the `src
 bash data_analysis_pipeline.sh
 ```
 
-- [Shell Script](src/data_analysis_pipeline.sh) content:
+[Shell Script](src/data_analysis_pipeline.sh) content:
 
     <<comment
     This shell script will include all the script running required to reproduce the dropout prediction analysis.
