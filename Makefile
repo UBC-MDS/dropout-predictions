@@ -5,7 +5,6 @@
 # ** please activate the conda environment before using the Make
 
 all: doc/The_Report_of_Dropout_Prediction.html 
-#data/raw/data.csv data/processed/train_eda.csv results/target_count_bar_plot.png results/correlation_heatmap_plot.pn results/correlation_with_target_plot.png results/gender_density_plot.png
 
 # download data
 data/raw/data.csv: src/download_data.py
