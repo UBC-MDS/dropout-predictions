@@ -52,30 +52,45 @@ In this project, we adopt the following data analysis pipeline. First of all, we
 There are different ways to replicate the analysis.
 
 
-First clone [this](https://github.com/UBC-MDS/dropout-predictions.git) GitHub repository, install the
-conda environment listed in [here](https://github.com/UBC-MDS/dropout-predictions/blob/main/env/dropout_pred_env.yml) 
-> `conda env create -f env/dropout_pred_env.yml`
+1. Clone [this](https://github.com/UBC-MDS/dropout-predictions.git) GitHub repository
 
-activate the environment 
-> `conda activate dropout_pred_env`
+```git clone https://github.com/UBC-MDS/dropout-predictions.git```
+
+2. Install the conda environment listed in [here](https://github.com/UBC-MDS/dropout-predictions/blob/main/env/dropout_pred_env.yml) 
+
+```conda env create -f env/dropout_pred_env.yml```
+
+3. Activate the environment 
+
+```conda activate dropout_pred_env```
+
+We can either use the [Makefile](#makefile) or [Shell Script](#clean-files) to run the analysis.
 
 ### Makefile
 
-#### Target: all
+#### Run All
 
-To run the whole analysis, run the following command:
+To run the whole analysis, run the following command in the root directory:
 
-> `make all`
+```make all```
 
-It will check whether the [final report](doc/The_Report_of_Dropout_Prediction.html) exist or not. If the final report is not exist, the Makefile will run all the dependencies required to generate the report.
+It will check whether the [final report](doc/The_Report_of_Dropout_Prediction.html) exists or not. If the final report does not exist, the Makefile will run all the dependencies required to generate the report.
 
-#### Target: clean
-    
-> `make clean`
+#### Clean Files
+
+To clean the intermediate and final results including images, CSV files and report, run the following command in the root directory:
+
+```make clean```
+
+It will clean all the files under `data/raw/`, `results/`, and all the CSV files under `data/processed/`.
 
 ### Shell Script
 
-After activating the conda environment, run the following commands `bash data_analysis_pipeline.sh` under `src` folder:
+After activating the Conda environment, run the following command under the `src` folder.
+
+```bash data_analysis_pipeline.sh```
+
+- [Shell Script](src/data_analysis_pipeline.sh) content:
 
     <<comment
     This shell script will include all the script running required to reproduce the dropout prediction analysis.
