@@ -49,16 +49,33 @@ In this project, we adopt the following data analysis pipeline. First of all, we
 
 ## Usage
 
-To replicate the analysis, clone [this](https://github.com/UBC-MDS/dropout-predictions.git) GitHub repository, install the
+There are different ways to replicate the analysis.
+
+
+First clone [this](https://github.com/UBC-MDS/dropout-predictions.git) GitHub repository, install the
 conda environment listed in [here](https://github.com/UBC-MDS/dropout-predictions/blob/main/env/dropout_pred_env.yml) 
 > `conda env create -f env/dropout_pred_env.yml`
 
 activate the environment 
 > `conda activate dropout_pred_env`
 
-and run the following commands `bash data_analysis_pipeline.sh` under `src` folder:
+### Makefile
 
+#### Target: all
+
+To run the whole analysis, run the following command:
+
+> `make all`
+
+It will check whether the [final report](doc/The_Report_of_Dropout_Prediction.html) exist or not. If the final report is not exist, the Makefile will run all the dependencies required to generate the report.
+
+#### Target: clean
     
+> `make clean`
+
+### Shell Script
+
+After activating the conda environment, run the following commands `bash data_analysis_pipeline.sh` under `src` folder:
 
     <<comment
     This shell script will include all the script running required to reproduce the dropout prediction analysis.
@@ -80,9 +97,8 @@ and run the following commands `bash data_analysis_pipeline.sh` under `src` fold
     # model testing
     python model_result.py --test="../data/processed/test.csv" --out_dir="../results/"
 
-> `conda deactivate`
-
-> `Rscript -e 'rmarkdown::render("../doc/The_Report_of_Dropout_Prediction.Rmd")'`
+    # report generation
+    Rscript -e 'rmarkdown::render("../doc/The_Report_of_Dropout_Prediction.Rmd")'
 
 
 ## License
