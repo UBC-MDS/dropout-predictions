@@ -1,11 +1,15 @@
-# Makefile
+# Dropout Prediction Makefile
 # Author: Caesar Wong
 # Date: 2022-11-29
-
+# 
 # ** please activate the conda environment before using the Make
+# This is a makefile for the dropout prediction project, there are 3 ways to run the make file:
+# 1. `make all`: generate the HTML report and run all the required dependencies files / programs.
+# 2. `make <target files>`: only run the specified target files.
+# 3. `make clean`: clean all the generated files, images, and report files.
+
 
 all: doc/The_Report_of_Dropout_Prediction.html 
-#data/raw/data.csv data/processed/train_eda.csv results/target_count_bar_plot.png results/correlation_heatmap_plot.pn results/correlation_with_target_plot.png results/gender_density_plot.png
 
 # download data
 data/raw/data.csv: src/download_data.py

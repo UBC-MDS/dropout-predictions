@@ -41,24 +41,74 @@ The hyperparameters of the aforementioned models are optimized using cross-valid
 
 The EDA performed can be found in the [dropout_pred_EDA.pdf](https://github.com/UBC-MDS/dropout-predictions/blob/main/src/dropout_pred_EDA.pdf).
 
-## Data Analysis Pipeline
+# Data Analysis Pipeline
 
 In this project, we adopt the following data analysis pipeline. First of all, we dowload and preprocess the raw data. After splitting and storing the required data files, we use the `train_eda.csv` as the input of `general_EDA.py`, `train.csv` for `model_training.py`, and `testing.py` for `model_result.py`.
 
 ![plot](doc/data_analysis_pipeline.png)
 
-## Usage
+# Usage
 
-To replicate the analysis, clone [this](https://github.com/UBC-MDS/dropout-predictions.git) GitHub repository, install the
-conda environment listed in [here](https://github.com/UBC-MDS/dropout-predictions/blob/main/env/dropout_pred_env.yml) 
-> `conda env create -f env/dropout_pred_env.yml`
+There are different ways to replicate the analysis.
 
-activate the environment 
-> `conda activate dropout_pred_env`
 
-and run the following commands `bash data_analysis_pipeline.sh` under `src` folder:
+1. Clone [this](https://github.com/UBC-MDS/dropout-predictions.git) GitHub repository
 
-    
+```
+git clone https://github.com/UBC-MDS/dropout-predictions.git
+```
+
+2. Navigate to the GitHub repository
+
+```
+cd dropout-predictions
+```
+
+3. Install the conda environment listed in [here](https://github.com/UBC-MDS/dropout-predictions/blob/main/env/dropout_pred_env.yml) 
+
+```
+conda env create -f env/dropout_pred_env.yml
+```
+
+4. Activate the environment 
+
+```
+conda activate dropout_pred_env
+```
+
+We can either use the [Makefile](#makefile) or [Shell Script](#shell-script) to run the analysis.
+
+## Makefile
+
+### Run All
+
+To run the whole analysis, run the following command in the root directory:
+
+```
+make all
+```
+
+It will check whether the [final report](doc/The_Report_of_Dropout_Prediction.html) exists or not. If the final report does not exist, the Makefile will run all the dependencies required to generate the report.
+
+### Clean Files
+
+To clean the intermediate and final results including images, CSV files and report, run the following command in the root directory:
+
+```
+make clean
+```
+
+It will clean all the files under `data/raw/`, `results/`, and all the CSV files under `data/processed/`.
+
+## Shell Script
+
+After activating the Conda environment, run the following command under the `src` folder.
+
+```
+bash data_analysis_pipeline.sh
+```
+
+[Shell Script](src/data_analysis_pipeline.sh) content:
 
     <<comment
     This shell script will include all the script running required to reproduce the dropout prediction analysis.
@@ -80,17 +130,16 @@ and run the following commands `bash data_analysis_pipeline.sh` under `src` fold
     # model testing
     python model_result.py --test="../data/processed/test.csv" --out_dir="../results/"
 
-> `conda deactivate`
+    # report generation
+    Rscript -e 'rmarkdown::render("../doc/The_Report_of_Dropout_Prediction.Rmd")'
 
-> `Rscript -e 'rmarkdown::render("../doc/The_Report_of_Dropout_Prediction.Rmd")'`
 
-
-## License
+# License
 
 The Student Dropout Predictor materials here are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) license. This allows for the sharing and adaptation of the datasets for our purpose of academic study and understanding, with the appropriate credit given.
 
 
-## References
+# References
 
 - Realinho,Valentim, Vieira Martins,Mónica, Machado,Jorge & Baptista,Luís. (2021). Predict students' dropout and academic success. UCI Machine Learning Repository. https://archive-beta.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success
 

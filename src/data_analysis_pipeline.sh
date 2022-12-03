@@ -20,3 +20,6 @@ python model_training.py --train="../data/processed/train.csv" --scoring_metrics
 
 # model testing
 python model_result.py --test="../data/processed/test.csv" --out_dir="../results/"
+
+# report generation
+Rscript -e 'rmarkdown::render("../doc/The_Report_of_Dropout_Prediction.Rmd")'
