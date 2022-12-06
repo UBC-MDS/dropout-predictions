@@ -17,5 +17,3 @@ RUN conda install -c conda-forge --quiet --yes \
     'r-kableextra'
 
 RUN pip install vl-convert-python
-
-
