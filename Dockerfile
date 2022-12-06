@@ -1,3 +1,4 @@
+# Author: Andy Wang
 FROM jupyter/scipy-notebook
 
 USER root
