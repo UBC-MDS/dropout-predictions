@@ -52,7 +52,6 @@ In this project, we adopt the following data analysis pipeline. First of all, we
 
 There are different ways to replicate the analysis.
 
-
 1. Clone [this](https://github.com/UBC-MDS/dropout-predictions.git) GitHub repository
 
 ```
@@ -65,22 +64,23 @@ git clone https://github.com/UBC-MDS/dropout-predictions.git
 cd dropout-predictions
 ```
 
-3. Install the conda environment listed in [here](https://github.com/UBC-MDS/dropout-predictions/blob/main/env/dropout_pred_env.yml) 
+3. (without docker) Install the conda environment listed in [here](https://github.com/UBC-MDS/dropout-predictions/blob/main/env/dropout_pred_env.yml) 
 
 ```
 conda env create -f env/dropout_pred_env.yml
 ```
 
-4. Activate the environment 
+4. (without docker) Activate the environment 
 
 ```
 conda activate dropout_pred_env
 ```
 
-We can either use the [Makefile](#makefile) or [Shell Script](#shell-script) to run the analysis.
+We can either use the [docker](#docker), [Makefile](#makefile) or [Shell Script](#shell-script) to run the analysis.
 
 ## Docker
 ### Using Docker
+
 To run this analysis using Docker, clone/download this repository, use the command line to navigate to the root of this project on your computer, and then type the following at the command line/terminal from the root directory of this project.
 
 ```
