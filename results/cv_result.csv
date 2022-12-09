@@ -1,6 +1,6 @@
 ,logisticRegression,logisticRegression,NaiveBayes,NaiveBayes,RandomForestClassifier,RandomForestClassifier
 ,mean,std,mean,std,mean,std
-fit_time,0.187,0.009,0.002,0.0,1.542,0.083
-score_time,0.0,0.0,0.001,0.0,0.013,0.008
-test_score,0.841,0.019,0.729,0.055,0.822,0.019
-train_score,0.85,0.007,0.73,0.053,0.859,0.008
+fit_time,0.184,0.011,0.001,0.001,1.541,0.016
+score_time,0.001,0.001,0.002,0.001,0.009,0.0
+test_score,0.841,0.019,0.729,0.055,0.818,0.02
+train_score,0.85,0.007,0.73,0.053,0.862,0.008

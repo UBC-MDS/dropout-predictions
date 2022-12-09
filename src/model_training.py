@@ -34,7 +34,7 @@ from sklearn.model_selection import (
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.naive_bayes import GaussianNB
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.ensemble import RandomForestClassifier
 from utils.print_msg import print_msg # adding utils function for print msg
 
 
@@ -77,7 +77,7 @@ def main(train, scoring_metrics, out_dir):
     # initialize our selected model
     models = {'logisticRegression': LogisticRegression(random_state=123, max_iter=1000),
               'NaiveBayes': GaussianNB(),
-              'RandomForestClassifier': RandomForestClassifier()}
+              'RandomForestClassifier': RandomForestClassifier(random_state=123)}
     
     # random forest specific hyperparameter
     max_features = randint(10, 26) # number of features in consideration at every split
