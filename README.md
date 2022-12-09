@@ -100,6 +100,11 @@ make clean
 
 It will clean all the files under `data/raw/`, `results/`, and all the CSV files under `data/processed/`.
 
+### Dependency Diagram
+The diagram below shows the structure of how the project and this repo is structured to produce the final results.
+[Makefile.png](https://github.com/UBC-MDS/dropout-predictions/blob/update_makefile/Makefile.png).
+
+
 ## Shell Script
 
 After activating the Conda environment, run the following command under the `src` folder.
