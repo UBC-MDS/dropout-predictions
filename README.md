@@ -78,6 +78,20 @@ conda activate dropout_pred_env
 
 We can either use the [Makefile](#makefile) or [Shell Script](#shell-script) to run the analysis.
 
+## Docker
+### Using Docker
+To run this analysis using Docker, clone/download this repository, use the command line to navigate to the root of this project on your computer, and then type the following at the command line/terminal from the root directory of this project.
+
+```
+docker run --rm -v /$(pwd):/home/jovyan/dropout-predictions tiger12055/dropout-predictions:latest make -C./dropout-predictions all
+```
+
+To clean up the analysis type:
+
+```
+docker run --rm -v /$(pwd):/home/jovyan/dropout-predictions tiger12055/dropout-predictions:latest make -C./dropout-predictions clean
+```
+
 ## Makefile
 
 ### Run All
@@ -102,7 +116,7 @@ It will clean all the files under `data/raw/`, `results/`, and all the CSV files
 
 ### Dependency Diagram
 The diagram below shows the structure of how the project and this repo is structured to produce the final results.
-![plot](Makefile.png)
+![plot](Makefile.png){height=150}
 
 
 ## Shell Script
