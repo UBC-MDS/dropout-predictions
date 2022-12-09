@@ -1,3 +1,4 @@
+[![Python application](https://github.com/UBC-MDS/dropout-predictions/actions/workflows/test_branch.yml/badge.svg)](https://github.com/UBC-MDS/dropout-predictions/actions/workflows/test_branch.yml) [![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](<YOUR URL HERE>)
 # Student Dropout Predictor
 
 
