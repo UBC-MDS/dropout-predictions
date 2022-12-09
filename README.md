@@ -116,7 +116,7 @@ It will clean all the files under `data/raw/`, `results/`, and all the CSV files
 
 ### Dependency Diagram
 The diagram below shows the structure of how the project and this repo is structured to produce the final results.
-![plot](Makefile.png){height=250}
+![plot](Makefile.png)(width=120%)
 
 
 ## Shell Script
