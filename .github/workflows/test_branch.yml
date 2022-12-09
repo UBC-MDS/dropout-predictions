@@ -34,10 +34,3 @@ jobs:
         pip install pyppeteer
         pip install docopt-ng
         pip install vl-convert-python
-    - name: Test with pytest
-      run: |
-        cd src && python download_data.py
-        python general_EDA.py
-        python preprocessing.py
-        python model_training.py
-        python model_result.py
