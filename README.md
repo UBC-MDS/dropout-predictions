@@ -153,6 +153,18 @@ bash data_analysis_pipeline.sh
     # report generation
     Rscript -e 'rmarkdown::render("../doc/The_Report_of_Dropout_Prediction.Rmd")'
 
+## Dependencies
+
+Please find more details for the dependencies in the [dropout_pred_env.yml](env/dropout_pred_env.yml) for the Python related dependencies.
+
+For R-related packages for report generation, please refer to the following:
+
+- "docopt==0.7.1"
+- "dplyr==1.0.9"
+- "kableExtra==1.3.4"
+- "knitr==1.40"
+- "rmarkdown==2.16"
+- "tidyverse==1.3.2"
 
 # License
 
