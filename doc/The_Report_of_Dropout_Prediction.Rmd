@@ -111,7 +111,7 @@ knitr::include_graphics("../results/Confusion_Matrix_NaiveBayes.png")
 knitr::include_graphics("../results/Confusion_Matrix_RandomForestClassifier.png")
 ```
 
-The performance of the three models can be visually inferred through the `Precision-Recall` plot and the `ROC-AUC` plot. Both the plots agree with our inferences from the confusion matrices. The `Logistic Regression` model provides the best combination of Precision and Recall for specific thresholds that can be leveraged to further improve the model performance. The area under the `ROC-AUC` plot is a measure of the model performance. The `Naive Bayes` model is out clearly performed by the other two models. The metrics are are tabulated below for reference.
+The performance of the three models can be visually inferred through the `Precision-Recall` plot and the `ROC-AUC` plot. Both the plots agree with our inferences from the confusion matrices. The `Logistic Regression` model provides good combination of Precision and Recall that can be leveraged to further improve the model performance. The default threshold of 0.5 is used in this model. The area under the `ROC-AUC` plot is a measure of the model performance. The `Naive Bayes` model is clearly outperformed by the other two models. The metrics are are tabulated below for reference.
 
 ```{r PR_curve, echo=FALSE, fig.cap="Figure 8. Precision and Recall Curve.", out.width="100%"}
 knitr::include_graphics("../results/PR_curve.png")
