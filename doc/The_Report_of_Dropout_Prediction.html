@@ -789,8 +789,8 @@ the number of younger female students than males. More male student aged
 25 to 30 tends to drop out than females. While the students after their
 30s, both gender demonstrate similar patterns.</p>
 <p>####Notes: Due to limited length of the report, the general
-visualization for the numerical &amp; categorical features will be shown
-in the archive EDA notebook</p>
+visualization for the numerical &amp; categorical features are shown in
+the archived EDA notebook.</p>
 </div>
 <div id="modeling-1" class="section level2">
 <h2>Modeling</h2>
@@ -812,7 +812,7 @@ numerical interpretation.</p>
 <p>Our train-test split yielded 726 examples in the testing dataset.
 There are 425 actual class <code>Dropout</code> and the rest are
 <code>Graduate</code>. The classification as a <code>Dropout</code> is
-considered a True Positive in the context of this project. The
+considered as a Positive in the context of this project. The
 <code>Logistic Regression</code> model identified the highest True
 positives among the three models (386) and achieved a superior recall
 metric of 0.83. <code>Naive Bayes</code> model came close behind with
@@ -1114,44 +1114,47 @@ further improve the performance.</p>
 </div>
 <div id="limitations" class="section level1">
 <h1>Limitations</h1>
-<p>Even though we performed serval machine learning processes to improve
-our workflow, the current project faces the following limitations:</p>
+<p>Even though we performed several machine learning processes to
+improve our workflow, the current project faces the following
+limitations:</p>
 <ul>
-<li>Only three models have been selected for model comparison<br />
-</li>
-<li>Further feature engineering is required to obtain different
-potential useful features<br />
-</li>
-<li>Some of the features are dropped at the early stage that might be a
-useful features in the feature engineering stage (e.g. combination of
-different features)</li>
-<li>Limited iterations in the randomized search, there could be some
-parameter values with better performance that the current search has not
-covered</li>
+<li>Only three models have been used for comparative performance
+analysis. The best performance achieved is not sufficient for deployment
+on real world data.</li>
+<li>Further feature engineering with domain expertise is required to
+obtain potentially useful features.</li>
+<li>Some of the features are dropped at the early stage that might have
+been useful features in the feature engineering stage (e.g. combination
+of different features).</li>
+<li>There are limited iterations in the randomized search. There could
+be some parameter values with better performance that the current search
+has not covered.</li>
 </ul>
 </div>
 <div id="future-directions" class="section level1">
 <h1>Future Directions</h1>
-<p>Based on the limitation listed above, we can imporve our project by
+<p>Based on the limitation listed above, we can improve our project by
 the following directions:</p>
 <ul>
 <li>Further <code>Feature Selection</code> &amp;
 <code>Feature Engineering</code> is needed. Train the model using
 different feature sets, we can explore different combination of the
-features and perform different transformation, for example, polynomial
-transformation<br />
+features and perform different transformation, such as, polynomial
+transformation.<br />
 </li>
-<li>Use a variety of model to compare the performance, such that the
-comparison will be more comprehensive<br />
+<li>Use a variety of models to compare the performance, such that the
+comparison will be more comprehensive. Ensemble models could be tried to
+achieve further performance improvement.<br />
 </li>
 <li>Increase the iteration in randomized search in order to search for
-more potentially beneficial parameter values<br />
+more potentially beneficial parameter values. Grid search could also be
+used to narrow down on the optimized hyperparameters.<br />
 </li>
 <li>Increase code modularization by using object oriented
-programming<br />
+programming.<br />
 </li>
 <li>Adopt better code logging practice instead of using the print
-function</li>
+function.</li>
 </ul>
 </div>
 <div id="references" class="section level1 unnumbered">
