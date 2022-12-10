@@ -83,13 +83,13 @@ knitr::include_graphics("../results/gender_density_plot.png")
 
 The density plot reveals the gender imbalance in our data set with the number of younger female students than males. More male student aged 25 to 30 tends to drop out than females. While the students after their 30s, both gender demonstrate similar patterns.
 
-####Notes: Due to limited length of the report, the general visualization for the numerical & categorical features will be shown in the archive EDA notebook
+####Notes: Due to limited length of the report, the general visualization for the numerical & categorical features are shown in the archived EDA notebook.
 
 ## Modeling
 
 The objective of this project is to investigate how accurately we can predict that a student will drop out of school. Furthermore what underlying factors are the predominant influencing this outcome? Accurate classification of a true drop out in the available data is our chosen metric of interest. This is defined as `Recall` and it represents the proportion of the true drop-outs in the dataset, accurately predicted by the model. Each of the three models Naive Bayes, Logistic Regression and Random Forest Classifier were fitted on training data. The hyperparameter tuning was performed on using `Random Search CV` for Logistic Regression and Random Forest Classifier. The optimized models were then used to predict the classification on the test data. The performance of the models was compared through the Confusion Matrix, Precision-Recall curve, and Receive-Operating Characteristics plots. The metrics were tabulated for numerical interpretation.
 
-Our train-test split yielded 726 examples in the testing dataset. There are 425 actual class `Dropout` and the rest are `Graduate`. The classification as a `Dropout` is considered a True Positive in the context of this project. The `Logistic Regression` model identified the highest True positives among the three models (386) and achieved a superior recall metric of `r round(test_result[[1,2]], 2)`. `Naive Bayes` model came close behind with 400 true positives at a recall metric of `r round(test_result[[1,3]], 2)`. The `Random Forest` model achieved an appreciable recall metric of `r round(test_result[[1,4]], 2)` with 403 true positive. Overall, the `Logistic Regression` model result in the highest recall score (`r round(test_result[[1,2]], 2)`) and since we focus on the recall score (those who drop out of school), therefore, we conclude that the `Logistic Regression` model perform the best in terms of recall.
+Our train-test split yielded 726 examples in the testing dataset. There are 425 actual class `Dropout` and the rest are `Graduate`. The classification as a `Dropout` is considered as a Positive in the context of this project. The `Logistic Regression` model identified the highest True positives among the three models (386) and achieved a superior recall metric of `r round(test_result[[1,2]], 2)`. `Naive Bayes` model came close behind with 400 true positives at a recall metric of `r round(test_result[[1,3]], 2)`. The `Random Forest` model achieved an appreciable recall metric of `r round(test_result[[1,4]], 2)` with 403 true positive. Overall, the `Logistic Regression` model result in the highest recall score (`r round(test_result[[1,2]], 2)`) and since we focus on the recall score (those who drop out of school), therefore, we conclude that the `Logistic Regression` model perform the best in terms of recall.
 
 The `Random Forest Classifier` and `Logistic Regression` performed appreciably on the `f1` score which is a balanced measure of model `precision` and `recall`. However Naive Bayes suffered a relative low `f1` score due to a low `precision`. This is due to more False Positives predicted by `Naive Bayes` than the other models. The corresponding confusion matrices derived from the analysis are shown below for reference.
 
@@ -135,21 +135,22 @@ The current analysis is performed using the features selected post EDA through h
 
 # Limitations
 
-Even though we performed serval machine learning processes to improve our workflow, the current project faces the following limitations:
+Even though we performed several machine learning processes to improve our workflow, the current project faces the following limitations:
 
--   Only three models have been selected for model comparison\
--   Further feature engineering is required to obtain different potential useful features\
--   Some of the features are dropped at the early stage that might be a useful features in the feature engineering stage (e.g. combination of different features)
--   Limited iterations in the randomized search, there could be some parameter values with better performance that the current search has not covered
+-   Only three models have been used for comparative performance analysis. The best performance achieved is not sufficient for deployment on real world data.
+-   Further feature engineering with domain expertise is required to obtain potentially useful features.
+-   Some of the features are dropped at the early stage that might have been useful features in the feature engineering stage (e.g. combination of different features).
+-   There are limited iterations in the randomized search. There could be some parameter values with better performance that the current search has not covered.
 
 # Future Directions
 
-Based on the limitation listed above, we can imporve our project by the following directions:
+Based on the limitation listed above, we can improve our project by the following directions:
 
--   Further `Feature Selection` & `Feature Engineering` is needed. Train the model using different feature sets, we can explore different combination of the features and perform different transformation, for example, polynomial transformation\
--   Use a variety of model to compare the performance, such that the comparison will be more comprehensive\
--   Increase the iteration in randomized search in order to search for more potentially beneficial parameter values\
--   Increase code modularization by using object oriented programming\
--   Adopt better code logging practice instead of using the print function
+-   Further `Feature Selection` & `Feature Engineering` is needed. Train the model using different feature sets, we can explore different combination of the features and perform different transformation, such as, polynomial transformation.\
+-   Use a variety of models to compare the performance, such that the comparison will be more comprehensive. Ensemble models could be tried to achieve further performance improvement.\
+-   Increase the iteration in randomized search in order to search for more potentially beneficial parameter values. Grid search could also be used to narrow down on the optimized hyperparameters.\
+-   Increase code modularization by using object oriented programming.\
+-   Adopt better code logging practice instead of using the print function.
+-   Confusion matrix for each model can be written out to a csv file to enable inline R code functionality in report.
 
 # References
