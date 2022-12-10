@@ -83,8 +83,7 @@ knitr::include_graphics("../results/gender_density_plot.png")
 
 The density plot reveals the gender imbalance in our data set with the number of younger female students than males. More male student aged 25 to 30 tends to drop out than females. While the students after their 30s, both gender demonstrate similar patterns.
 
-####Notes:
-Due to limited length of the report, the general visualization for the numerical & categorical features will be shown in the archive EDA notebook
+####Notes: Due to limited length of the report, the general visualization for the numerical & categorical features will be shown in the archive EDA notebook
 
 ## Modeling
 
