@@ -15,7 +15,7 @@ library(kableExtra)
 library(knitr)
 ```
 
-```{r load model test results, message=FALSE, warning=FALSE, echo=FALSE}
+```{r load model test results, echo=FALSE, message=FALSE, warning=FALSE}
 test_result <- read_csv('../results/score_on_test.csv')
 colnames(test_result) <- c("Item","LogisticRegression", 
                            "NaiveBayes","RandomForest"
@@ -23,7 +23,7 @@ colnames(test_result) <- c("Item","LogisticRegression",
 
 ```
 
-```{r load model results, message=FALSE, warning=FALSE, echo=FALSE}
+```{r load model results, echo=FALSE, message=FALSE, warning=FALSE}
 cv_result <- read_csv("../results/cv_result.csv")
 colnames(cv_result) <- c("Item", rep("LogisticRegression", 2), 
                           rep("NaiveBayes", 2),
@@ -59,25 +59,25 @@ The code to perform the analysis and create the report can be found [here](https
 
 ## EDA
 
-```{r target_count_bar_plot, echo=FALSE, fig.cap="Figure 1. Visualization of targets of three categories.", out.width = '100%'}
+```{r target_count_bar_plot, echo=FALSE, fig.cap="Figure 1. Visualization of targets of three categories.", out.width="100%"}
 knitr::include_graphics("../results/target_count_bar_plot.png")
 ```
 
 From the above plot, we can see this problem was a three-category classification task, and there exists a strong imbalance between those three classes. The class Graduate has the majority count which is around 50% of the records and Dropout has 32% of the total records. The Enrolled only has 18% of the total records. Thus, during our training, we need to find a way to fix this imbalance issue, possible solution would be setting the `class_weight` in our model. We decide to drop one category which is enrolled student and only focus on graduate & dropout students to train our models.After dropping the Enrolled students, we have around 60% graduated students and 40% dropout students.
 
-```{r correlation_heatmap_plot, echo=FALSE, fig.cap="Figure 2. Heatmap of correlation across all features.", out.width = '100%'}
+```{r correlation_heatmap_plot, echo=FALSE, fig.cap="Figure 2. Heatmap of correlation across all features.", out.width="100%"}
 knitr::include_graphics("../results/correlation_heatmap_plot.png")
 ```
 
 From the correlation heatmap, we can observe that some features are strongly correlated (the dark red color), for example, Nationality & International, Age at enrollment & Application mode. There are some features with negative correlation, for example, Age at enrollment & Daytime Evening Attendance. In the following sections, we would like to further investigate those positively correlated features, and features in different potential categories (Demographic, Macroeconomic, Academic data at enrollment, etc.).
 
-```{r correlation_with_target_plot, echo=FALSE, fig.cap="Figure 3. Bar plot of feature correlation for target.", out.width = '100%'}
+```{r correlation_with_target_plot, echo=FALSE, fig.cap="Figure 3. Bar plot of feature correlation for target.", out.width="100%"}
 knitr::include_graphics("../results/correlation_with_target_plot.png")
 ```
 
-There are more negatively correlated features than positives one. The top 3 positively correlated features are `Age at enrollment`, `Debtor`, and `Gender`. In the below data exploration, we can further investigate their relationship.
+The top 3 positively correlated features are `Age at enrollment`, `Debtor`, and `Gender`. In the below data exploration, we can further investigate their relationship.
 
-```{r gender_density_plot, echo=FALSE, fig.cap="Figure 4. Density plot of different ages with enrollment by gender.", out.width = '100%'}
+```{r gender_density_plot, echo=FALSE, fig.cap="Figure 4. Density plot of different ages with enrollment by gender.", out.width="100%"}
 knitr::include_graphics("../results/gender_density_plot.png")
 ```
 
@@ -94,35 +94,35 @@ Our train-test split yielded 726 examples in the testing dataset. There are 425 
 
 The `Random Forest Classifier` and `Logistic Regression` performed appreciably on the `f1` score which is a balanced measure of model `precision` and `recall`. However Naive Bayes suffered a relative low `f1` score due to a low `precision`. This is due to more False Positives predicted by `Naive Bayes` than the other models. The corresponding confusion matrices derived from the analysis are shown below for reference.
 
-```{r print model test results, message=FALSE, warning=FALSE, echo=FALSE}
+```{r print model test results, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::kable(test_result, caption = "Table 1. Testing Score Results")|>
     kableExtra::kable_styling(full_width = FALSE)
 
 ```
 
-```{r Confusion_Matrix_logisticRegression, echo=FALSE, fig.cap="Figure 5. Confusion matrix for Logistic Regression.", out.width = '100%'}
+```{r Confusion_Matrix_logisticRegression, echo=FALSE, fig.cap="Figure 5. Confusion matrix for Logistic Regression.", out.width="100%"}
 knitr::include_graphics("../results/Confusion_Matrix_logisticRegression.png")
 ```
 
-```{r Confusion_Matrix_NaiveBayes, echo=FALSE, fig.cap="Figure 6. Confusion matrix image for Naive Bayes.", out.width = '100%'}
+```{r Confusion_Matrix_NaiveBayes, echo=FALSE, fig.cap="Figure 6. Confusion matrix image for Naive Bayes.", out.width="100%"}
 knitr::include_graphics("../results/Confusion_Matrix_NaiveBayes.png")
 ```
 
-```{r Confusion_Matrix_RandomForestClassifier, echo=FALSE, fig.cap="Figure 7. Confusion matrix image for RandomForest.", out.width = '100%'}
+```{r Confusion_Matrix_RandomForestClassifier, echo=FALSE, fig.cap="Figure 7. Confusion matrix image for RandomForest.", out.width="100%"}
 knitr::include_graphics("../results/Confusion_Matrix_RandomForestClassifier.png")
 ```
 
 The performance of the three models can be visually inferred through the `Precision-Recall` plot and the `ROC-AUC` plot. Both the plots agree with our inferences from the confusion matrices. The `Logistic Regression` model provides the best combination of Precision and Recall for specific thresholds that can be leveraged to further improve the model performance. The area under the `ROC-AUC` plot is a measure of the model performance. The `Naive Bayes` model is out clearly performed by the other two models. The metrics are are tabulated below for reference.
 
-```{r PR_curve, echo=FALSE, fig.cap="Figure 8. Precision and Recall Curve.", out.width = '100%'}
+```{r PR_curve, echo=FALSE, fig.cap="Figure 8. Precision and Recall Curve.", out.width="100%"}
 knitr::include_graphics("../results/PR_curve.png")
 ```
 
-```{r ROC_curve, echo=FALSE, fig.cap="Figure 9. ROC (receiver operating characteristic) Curve.", out.width = '100%'}
+```{r ROC_curve, echo=FALSE, fig.cap="Figure 9. ROC (receiver operating characteristic) Curve.", out.width="100%"}
 knitr::include_graphics("../results/ROC_curve.png")
 ```
 
-```{r print model results, message=FALSE, warning=FALSE, echo=FALSE}
+```{r print model results, echo=FALSE, message=FALSE, warning=FALSE}
 cv_result <- read_csv("../results/cv_result.csv")
 colnames(cv_result) <- c("Item", rep("LogisticRegression", 2), 
                           rep("NaiveBayes", 2),
